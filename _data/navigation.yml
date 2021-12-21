@@ -1,0 +1,11 @@
+main:
+  - title: "Share"
+    url: /share/
+  - title: "User Guide"
+    url: /userGuide/
+  - title: "Contact"
+    url: /contact/
+  - title: "References"
+    url: /references/
+  - title: "Partners"
+    url: /partners/
