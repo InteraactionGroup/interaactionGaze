@@ -10,14 +10,14 @@ header:
         - label: "<i class='fas fa-hand-point-up'></i> Télécharger maintenant"
           url: https://github.com/InteraactionGroup/interaactionGaze/releases
 excerpt: >
-interaactionGaze est un système de Calibration de la souris par l'eyetracker. <br />
+  InterAACtionGaze est un système de Calibration de la souris par l'eyetracker. <br />
 ---
 
 {% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
 
-## Pourquoi interaactionGaze ?
+## Pourquoi InterAACtionGaze ?
 
-interaactionGaze est un logiciel simple d'utilisation et accessible.
+InterAACtionGaze est un logiciel simple d'utilisation et accessible.
 Il permet de Calibrer le mouvement de la souris.
 
 Compatible avec les eye-tracker tobii et bientôt avec les Webcams.
