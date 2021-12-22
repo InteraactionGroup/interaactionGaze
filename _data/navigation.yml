@@ -1,6 +1,4 @@
 main:
-  - title: "Share"
-    url: /share/
   - title: "User Guide"
     url: /userGuide/
   - title: "Contact"

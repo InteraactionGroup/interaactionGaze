@@ -5,23 +5,19 @@
 layout: splash
 permalink: /fr
 header:
-    overlay_image: /assets/images/logoInteraactionScene.png
+    overlay_image: /assets/userGuideImages/interaactionGaze.png
     actions:
-        - label: "<i class='fas fa-hand-point-up'></i> Essayer maintenant"
-          url: https://lig-interaactionscene.imag.fr/stable/#/dashboard
+        - label: "<i class='fas fa-hand-point-up'></i> Télécharger maintenant"
+          url: https://github.com/InteraactionGroup/interaactionGaze/releases
 excerpt: >
-  InteraactionScene est un système de Communication Améliorée et Alternative hautement contextualisé et personnel qui peut être utilisé pour les enfants ou les adultes de tous âges ayant des limitations cognitives ou linguistiques importantes. <br />
+  InteraactionGaze est un système de Calibration de la souris par l'eyetracker. <br />
 ---
 
-{% include figure image_path="/assets/images/interaactionScene.png" alt="InteraactionScene" %}
+{% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
 
-## Pourquoi InteraactionScene ?
+## Pourquoi InteraactionGaze ?
 
-InteraactionScene est un logiciel simple d'utilisation et accessible.
-Il permet notemment de :
+InteraactionGaze est un logiciel simple d'utilisation et accessible.
+Il permet de Calibrer le mouvement de la souris.
 
-1. Fournir un niveau élevé d'informations contextuelles visuelles.
-2. Réduire la demande cognitive de l'utilisateur.
-3. Faciliter et accélérer l'apprentissage de la communication.
-4. Augmenter l'interaction sociale.
-5. Et il est aussi hautement personnalisable !
+Compatible avec les eye-tracker tobii et bientôt avec les Webcams.
