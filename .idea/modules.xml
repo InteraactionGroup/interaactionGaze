@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.interaactionGaze.untitled.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.interaactionGaze.untitled.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.interaactionGaze.untitled.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.interaactionGaze.untitled.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.interaactionGaze.untitled.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.interaactionGaze.untitled.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/interaactionGaze.iml" filepath="$PROJECT_DIR$/interaactionGaze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled.main.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled.test.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled.test.iml" />
+    </modules>
+  </component>
+</project>

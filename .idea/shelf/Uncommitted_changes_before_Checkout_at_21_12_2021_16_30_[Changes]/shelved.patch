@@ -1,0 +1,20 @@
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <wildcardResourcePatterns>\r\n      <entry name=\"!?*.java\" />\r\n      <entry name=\"!?*.form\" />\r\n      <entry name=\"!?*.class\" />\r\n      <entry name=\"!?*.groovy\" />\r\n      <entry name=\"!?*.scala\" />\r\n      <entry name=\"!?*.flex\" />\r\n      <entry name=\"!?*.kt\" />\r\n      <entry name=\"!?*.clj\" />\r\n    </wildcardResourcePatterns>\r\n    <annotationProcessing>\r\n      <profile default=\"true\" name=\"Default\" enabled=\"true\" />\r\n      <profile name=\"Gradle Imported\" enabled=\"true\">\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <processorPath useClasspath=\"false\">\r\n          <entry name=\"$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.10/625fc0055674dff70dbc76efa36d0f2c89b04a24/lombok-1.18.10.jar\" />\r\n        </processorPath>\r\n        <module name=\"untitled.main\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	
++++ b/.idea/compiler.xml	
+@@ -21,5 +21,10 @@
+         <module name="untitled.main" />
+       </profile>
+     </annotationProcessing>
++    <bytecodeTargetLevel>
++      <module name="com.github.interaactionGaze.untitled" target="11" />
++      <module name="com.github.interaactionGaze.untitled.main" target="11" />
++      <module name="com.github.interaactionGaze.untitled.test" target="11" />
++    </bytecodeTargetLevel>
+   </component>
+ </project>
+\ No newline at end of file
