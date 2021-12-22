@@ -15,12 +15,12 @@ layout: single
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center;width: 25%;"><a href="https://afsr.fr/"><img src="../assets/images/userGuideImages/afsrlogo.png" alt="asfr" style="
+      <td style="text-align: center;width: 25%;"><a href="https://afsr.fr/"><img src="../assets/userGuideImages/afsrlogo.png" alt="asfr" style="
     /* width: 20%; */
 "></a></td>
-      <td style="text-align: center;width: 25%;"><a href="https://www.univ-grenoble-alpes.fr/"><img src="../assets/images/userGuideImages/UGA.png" alt="uga"></a></td>
-      <td style="text-align: center;width: 25%;"><a href="https://www.liglab.fr/"><img src="../assets/images/userGuideImages/lig.png" alt="lig"></a></td>
-      <td style="text-align: center;width: 25%;"><a href="http://www.gipsa-lab.fr/"><img src="../assets/images/userGuideImages/Gipsa_Lab.png" alt="gipsa"></a></td>
+      <td style="text-align: center;width: 25%;"><a href="https://www.univ-grenoble-alpes.fr/"><img src="../assets/userGuideImages/UGA.png" alt="uga"></a></td>
+      <td style="text-align: center;width: 25%;"><a href="https://www.liglab.fr/"><img src="../assets/userGuideImages/lig.png" alt="lig"></a></td>
+      <td style="text-align: center;width: 25%;"><a href="http://www.gipsa-lab.fr/"><img src="../assets/userGuideImages/Gipsa_Lab.png" alt="gipsa"></a></td>
     </tr>
   </tbody>
 </table>
@@ -38,9 +38,9 @@ layout: single
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center;width: 33%;"><a href="https://www.fondation-free.fr/"><img src="../assets/images/userGuideImages/free.jpg" alt="free"></a></td>
-      <td style="text-align: center;width: 33%;"><a href="https://www.fondation-afnic.fr/"><img src="../assets/images/userGuideImages/afnic.jpg" alt="afnic"></a></td>
-      <td style="text-align: center;width: 33%;"><a href="https://www.klesia.fr/"><img src="../assets/images/userGuideImages/klesia.jpg" alt="klesia"></a></td>
+      <td style="text-align: center;width: 33%;"><a href="https://www.fondation-free.fr/"><img src="../assets/userGuideImages/free.jpg" alt="free"></a></td>
+      <td style="text-align: center;width: 33%;"><a href="https://www.fondation-afnic.fr/"><img src="../assets/userGuideImages/afnic.jpg" alt="afnic"></a></td>
+      <td style="text-align: center;width: 33%;"><a href="https://www.klesia.fr/"><img src="../assets/userGuideImages/klesia.jpg" alt="klesia"></a></td>
     </tr>
   </tbody>
 </table>
