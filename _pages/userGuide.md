@@ -25,12 +25,12 @@ toc_sticky: true
 ## Settings
 {% include figure image_path="/assets/userGuideImages/Options.png" alt="options" caption="Clicking on options takes you to the options page." %}
 
-## Back
+### Back
 {% include figure image_path="/assets/userGuideImages/retour.png" alt="retour" caption="The back button allows you to return to the previous page." %}
 
-## Calibrate
+### Calibrate
 {% include figure image_path="/assets/userGuideImages/calibrer.png" alt="calibrer" caption="Launches the calibration tool, you will need to fix the indicated locations to improve the accuracy of the eyetracker." %}
 
-## Dwell time
+### Dwell time
 {% include figure image_path="/assets/userGuideImages/tempsDeFixation.png" alt="tempsDeFixation" caption="The dwell time is the setting that allows you to increase or decrease the time needed before a button is triggered by the eyetracker." %}
 

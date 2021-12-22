@@ -26,11 +26,11 @@ toc_sticky: true
 ## Options
 {% include figure image_path="/assets/userGuideImages/Options.png" alt="options" caption="Cliquer sur options vous envoie à la page d'option." %}
 
-## Retour
+### Retour
 {% include figure image_path="/assets/userGuideImages/retour.png" alt="retour" caption="Le bouton retour permet de revenir à la page précédente." %}
 
-## Calibrer
+### Calibrer
 {% include figure image_path="/assets/userGuideImages/calibrer.png" alt="calibrer" caption="Lance l'outil de calibration, vous devrez fixer les endroits indiqués pour améliorer la précision de l'eyetracker." %}
 
-## Temps de fixation
+### Temps de fixation
 {% include figure image_path="/assets/userGuideImages/tempsDeFixation.png" alt="tempsDeFixation" caption="Le temps de fixation est le réglage qui permet d'augmenter ou de diminuer le temps nécessaire avant qu'un bouton ne soit déclencher par l'eyetracker." %}
