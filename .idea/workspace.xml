@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="page FR update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/userGuide.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/userGuide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index-fr.md" beforeDir="false" afterPath="$PROJECT_DIR$/index-fr.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/index.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +38,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

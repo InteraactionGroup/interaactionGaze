@@ -10,7 +10,7 @@ header:
         - label: "<i class='fas fa-hand-point-up'></i> Télécharger maintenant"
           url: https://github.com/InteraactionGroup/interaactionGaze/releases
 excerpt: >
-  InterAACtionGaze est un système de Calibration de la souris par l'eyetracker. <br />
+  InterAACtionGaze est un système de Calibration de la souris par l'eyetracker, libre et évolutif <br />
 ---
 
 {% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
