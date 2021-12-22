@@ -8,7 +8,7 @@ toc_sticky: true
 
 ## Beginning
 
-{% include figure image_path="/assets/images/interaactionGaze.png" alt="InteraactionGaze" caption="This is what InteraactionGaze looks like on the 1st connection" %}
+{% include figure image_path="/assets/userGuideImages/interaactionGaze.png" alt="InteraactionGaze" caption="This is what InteraactionGaze looks like on the 1st connection" %}
 
 ## Play/Stop
 {% include figure image_path="/assets/userGuideImages/Play.png" alt="Play" caption="Click on play to activate the mouse control with the eyetracker." %}

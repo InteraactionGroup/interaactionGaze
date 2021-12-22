@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="page FR update">
+    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="page EN update">
+      <change afterPath="$PROJECT_DIR$/assets/userGuideImages/logoAugCom.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/references.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/references.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_pages/userGuide.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/userGuide.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index-fr.md" beforeDir="false" afterPath="$PROJECT_DIR$/index-fr.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fr/_pages/references.md" beforeDir="false" afterPath="$PROJECT_DIR$/fr/_pages/references.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +73,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640167191280</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="page EN update">
+      <created>1640169294983</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640169294983</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,6 +100,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="page FR update" />
-    <option name="LAST_COMMIT_MESSAGE" value="page FR update" />
+    <MESSAGE value="page EN update" />
+    <option name="LAST_COMMIT_MESSAGE" value="page EN update" />
   </component>
 </project>

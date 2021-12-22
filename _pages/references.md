@@ -5,7 +5,7 @@ layout: single
 ---
 
 ### Augcom
-<a href="https://interaactiongroup.github.io/AugCom/fr"><img src="../assets/images/userGuideImages/augCom.png" alt="augCom"></a>
+<a href="https://interaactiongroup.github.io/AugCom/fr"><img src="../assets/images/userGuideImages/logoAugCom.png" alt="augCom"></a>
 #### App:
 http://www.augcom.net/
 
