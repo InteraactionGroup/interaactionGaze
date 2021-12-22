@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="page FR update">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/navigation.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/navigation.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/masthead.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/masthead.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index-fr.md" beforeDir="false" afterPath="$PROJECT_DIR$/index-fr.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +51,7 @@
       <updated>1640100610474</updated>
       <workItem from="1640100611998" duration="76000" />
       <workItem from="1640100702025" duration="2698000" />
-      <workItem from="1640160527180" duration="6046000" />
+      <workItem from="1640160527180" duration="6745000" />
     </task>
     <task id="LOCAL-00001" summary="page FR update">
       <created>1640163803028</created>
@@ -64,7 +60,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640163803028</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="page FR update">
+      <created>1640167191280</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640167191280</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
