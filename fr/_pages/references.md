@@ -5,7 +5,7 @@ layout: single
 ---
 
 ### Augcom
-<a href="https://interaactiongroup.github.io/AugCom/fr"><img src="../assets/images/userGuideImages/logoAugCom.png" alt="augCom"></a>
+<a href="https://interaactiongroup.github.io/AugCom/fr"><img src="../assets/userGuideImages/logoAugCom.png" alt="augCom"></a>
 #### Application:
 http://www.augcom.net/
 
@@ -15,12 +15,12 @@ http://www.augcom.net/
 http://www.interaactionScene.net/
 
 ### GazePlay
-<a href="http://www.gazeplay.net/"><img src="../assets/images/userGuideImages/gazeplayClassicLogo.png" alt="gazeplay"></a>
+<a href="http://www.gazeplay.net/"><img src="../assets/userGuideImages/gazeplayClassicLogo.png" alt="gazeplay"></a>
 
 ### InteraactionBox-AFSR
-<a href="https://interaactionbox.afsr.fr/"><img src="../assets/images/userGuideImages/interaactionBox-AFSR.png" alt="interaactionBox-AFSR"></a>
+<a href="https://interaactionbox.afsr.fr/"><img src="../assets/userGuideImages/interaactionBox-AFSR.png" alt="interaactionBox-AFSR"></a>
 
 ### AFSR
-<a href="https://afsr.fr/"><img src="../assets/images/userGuideImages/afsrlogo.png" alt="AFSR"></a>
+<a href="https://afsr.fr/"><img src="../assets/userGuideImages/afsrlogo.png" alt="AFSR"></a>
 
 ### interaactionGaze
