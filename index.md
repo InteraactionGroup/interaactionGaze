@@ -10,14 +10,13 @@ header:
         - label: "<i class='fas fa-hand-point-up'></i> Download now"
           url: https://github.com/InteraactionGroup/interaactionGaze/releases
 excerpt: >
-  InterAACtionGaze is a free and scalable eyetracker mouse calibration system. <br />
+InterAACtionGaze is a gaze calibration system for moving the mouse with the eyes, free and scalable. <br />
 ---
 
 {% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
 
 ## Why InterAACtionGaze ?
 
-InterAACtionGaze is an easy to use and accessible software.
-It allows to calibrate the mouse movement.
+It calibrates the gaze for mouse movement by compensating for the mismatch between where the user is looking and where he wants to look.
 
 Compatible with tobii eye-tracker and soon with Webcams.
