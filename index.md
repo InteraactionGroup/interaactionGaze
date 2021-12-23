@@ -10,7 +10,7 @@ header:
         - label: "<i class='fas fa-hand-point-up'></i> Download now"
           url: https://github.com/InteraactionGroup/interaactionGaze/releases
 excerpt: >
-InterAACtionGaze is a gaze calibration system for moving the mouse with the eyes, free and scalable. <br />
+  InterAACtionGaze is a gaze calibration system for moving the mouse with the eyes, free and scalable. <br />
 ---
 
 {% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
