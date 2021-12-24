@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="fix" />
+    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="change logo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,8 +39,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\MATOU\IdeaProjects\interaactionGaze\assets\userGuideImages" />
       <recent name="C:\Users\MATOU\IdeaProjects\interaactionGaze\assets\images" />
+      <recent name="C:\Users\MATOU\IdeaProjects\interaactionGaze\assets\userGuideImages" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -53,6 +55,7 @@
       <workItem from="1640100702025" duration="2698000" />
       <workItem from="1640160527180" duration="6745000" />
       <workItem from="1640246891427" duration="1739000" />
+      <workItem from="1640334205306" duration="572000" />
     </task>
     <task id="LOCAL-00001" summary="page FR update">
       <created>1640163803028</created>
@@ -138,7 +141,21 @@
       <option name="project" value="LOCAL" />
       <updated>1640248418809</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="change logo">
+      <created>1640334390738</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1640334390738</updated>
+    </task>
+    <task id="LOCAL-00014" summary="change logo">
+      <created>1640334629734</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1640334629734</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +181,7 @@
     <MESSAGE value="fix bug" />
     <MESSAGE value="sentence changes" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="change logo" />
+    <option name="LAST_COMMIT_MESSAGE" value="change logo" />
   </component>
 </project>
