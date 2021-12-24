@@ -5,7 +5,7 @@
 layout: splash
 permalink: /
 header:
-    overlay_image: /assets/userGuideImages/interaactionGaze.png
+    overlay_image: /assets/images/logoInteraactionGaze.png
     actions:
         - label: "<i class='fas fa-hand-point-up'></i> Download now"
           url: https://github.com/InteraactionGroup/interaactionGaze/releases

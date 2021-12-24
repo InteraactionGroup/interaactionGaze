@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="change sentence">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="change images" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +55,7 @@
       <workItem from="1640246891427" duration="1739000" />
       <workItem from="1640334205306" duration="572000" />
       <workItem from="1640336324746" duration="667000" />
+      <workItem from="1640355936403" duration="330000" />
     </task>
     <task id="LOCAL-00001" summary="page FR update">
       <created>1640163803028</created>
@@ -163,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640336526383</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="change images">
+      <created>1640356173539</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1640356173539</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +197,7 @@
     <MESSAGE value="fix" />
     <MESSAGE value="change logo" />
     <MESSAGE value="change sentence" />
-    <option name="LAST_COMMIT_MESSAGE" value="change sentence" />
+    <MESSAGE value="change images" />
+    <option name="LAST_COMMIT_MESSAGE" value="change images" />
   </component>
 </project>

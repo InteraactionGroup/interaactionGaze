@@ -5,7 +5,7 @@
 layout: splash
 permalink: /fr
 header:
-    overlay_image: /assets/userGuideImages/interaactionGaze.png
+    overlay_image: /assets/images/logoInteraactionGaze.png
     actions:
         - label: "<i class='fas fa-hand-point-up'></i> Télécharger maintenant"
           url: https://github.com/InteraactionGroup/interaactionGaze/releases
@@ -13,7 +13,7 @@ excerpt: >
   InterAACtionGaze est un système de Calibrage du regard permettant le déplacement de la souris , libre et évolutif. <br />
 ---
 
-{% include figure image_path="assets/images/logoInteraactionGaze.png" alt="interaactionGaze" %}
+{% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
 
 ## Pourquoi InterAACtionGaze ?
 
