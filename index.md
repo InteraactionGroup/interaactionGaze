@@ -13,7 +13,7 @@ excerpt: >
   InterAACtionGaze is a gaze calibration system that allows the movement of the mouse, free and scalable. <br />
 ---
 
-{% include figure image_path="assets/images/logoInteraactionGaze.png" alt="interaactionGaze" %}
+{% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
 
 ## Why InterAACtionGaze ?
 
