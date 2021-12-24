@@ -13,7 +13,7 @@ excerpt: >
   InterAACtionGaze est un système de Calibrage du regard permettant le déplacement de la souris , libre et évolutif. <br />
 ---
 
-{% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
+{% include figure image_path="assets/images/logoInteraactionGaze.png" alt="interaactionGaze" %}
 
 ## Pourquoi InterAACtionGaze ?
 

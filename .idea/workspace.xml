@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="change logo">
+    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="change sentence">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +56,7 @@
       <workItem from="1640160527180" duration="6745000" />
       <workItem from="1640246891427" duration="1739000" />
       <workItem from="1640334205306" duration="572000" />
+      <workItem from="1640336324746" duration="667000" />
     </task>
     <task id="LOCAL-00001" summary="page FR update">
       <created>1640163803028</created>
@@ -155,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640334629734</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="change sentence">
+      <created>1640336526383</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1640336526383</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,6 +190,7 @@
     <MESSAGE value="sentence changes" />
     <MESSAGE value="fix" />
     <MESSAGE value="change logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="change logo" />
+    <MESSAGE value="change sentence" />
+    <option name="LAST_COMMIT_MESSAGE" value="change sentence" />
   </component>
 </project>
