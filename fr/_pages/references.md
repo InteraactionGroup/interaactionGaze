@@ -24,4 +24,4 @@ http://www.interaactionScene.net/
 <a href="https://afsr.fr/"><img src="../assets/userGuideImages/afsrlogo.png" alt="AFSR"></a>
 
 ### InteraactionGaze
-<a href="https://interaactiongroup.github.io/interaactionGaze/"><img src="../assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze"></a>
+<a href="https://interaactiongroup.github.io/interaactionGaze/"><img src="../assets/images/logoInteraactionGaze.png" alt="interaactionGaze"></a>

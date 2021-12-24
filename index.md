@@ -5,7 +5,7 @@
 layout: splash
 permalink: /
 header:
-    overlay_image: /assets/userGuideImages/interaactionGaze.png
+    overlay_image: /assets/images/logoInteraactionGaze.png
     actions:
         - label: "<i class='fas fa-hand-point-up'></i> Download now"
           url: https://github.com/InteraactionGroup/interaactionGaze/releases
@@ -13,7 +13,7 @@ excerpt: >
   InterAACtionGaze is a gaze calibration system for moving the mouse with the eyes, free and scalable. <br />
 ---
 
-{% include figure image_path="assets/userGuideImages/interaactionGaze.png" alt="interaactionGaze" %}
+{% include figure image_path="assets/images/logoInteraactionGaze.png" alt="interaactionGaze" %}
 
 ## Why InterAACtionGaze ?
 

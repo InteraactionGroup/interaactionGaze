@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="sentence changes">
-      <change beforePath="$PROJECT_DIR$/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/index.md" afterDir="false" />
-    </list>
+    <list default="true" id="cf01a88d-66ae-45c1-86fd-f64d116c7337" name="Changes" comment="fix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +52,7 @@
       <workItem from="1640100611998" duration="76000" />
       <workItem from="1640100702025" duration="2698000" />
       <workItem from="1640160527180" duration="6745000" />
-      <workItem from="1640246891427" duration="1511000" />
+      <workItem from="1640246891427" duration="1739000" />
     </task>
     <task id="LOCAL-00001" summary="page FR update">
       <created>1640163803028</created>
@@ -133,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640248222204</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix">
+      <created>1640248418809</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1640248418809</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,9 +161,9 @@
     <MESSAGE value="page EN update" />
     <MESSAGE value="fix images" />
     <MESSAGE value="fix english title in user guide" />
-    <MESSAGE value="fix" />
     <MESSAGE value="fix bug" />
     <MESSAGE value="sentence changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="sentence changes" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>
