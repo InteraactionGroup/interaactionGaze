@@ -72,6 +72,8 @@ body {
   margin-top: 0;
   color: #ededed !important;
   line-height: 1;
+  font-size: 1.953em !important;
+  transform: translate(75px, -20px);
 
   & + .page__meta {
     margin-top: -0.5em;

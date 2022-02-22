@@ -11,6 +11,7 @@
     <file url="file://$PROJECT_DIR$/_pages" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/_sass" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/assets" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assets/images/logoInteraactionGaze.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/ActiverLeClic.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/AfficherLeCurseur.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/CacherLeCurseur.png" charset="windows-1252" />
@@ -21,11 +22,9 @@
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/UGA.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/afnic.jpg" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/afsrlogo.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/userGuideImages/afsrlogo.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/calibrer.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/free.jpg" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/gazeplayClassicLogo.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/userGuideImages/interaactionBox-AFSR.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/interaactionBox-AFSR.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/interaactionGaze.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/assets/userGuideImages/klesia.jpg" charset="windows-1252" />
