@@ -7,8 +7,12 @@ permalink: /fr
 header:
     overlay_image: /assets/images/logoInteraactionGaze.png
     actions:
-        - label: "<i class='fas fa-hand-point-up'></i> Télécharger maintenant"
-          url: https://github.com/InteraactionGroup/interaactionGaze/releases
+        - label: "<i class='fab fa-windows'></i> Installer pour Windows"
+          url: https://github.com/InteraactionGroup/interaactionGaze/releases/latest/download/interAACtionGaze-windows-x64-installer.exe
+        - label: "<i class='fab fa-linux'></i> Installer pour  Linux"
+          url: https://github.com/InteraactionGroup/interaactionGaze/releases/latest/download/interAACtionGaze-linux.tar.gz
+        - label: "<i class='fab fa-apple'></i> Installer pour MacOS"
+          url: https://github.com/InteraactionGroup/interaactionGaze/releases/latest/download/interAACtionGaze-macos.tar.gz
 excerpt: >
   InterAACtionGaze est un système de Calibrage du regard permettant le déplacement de la souris , libre et évolutif. <br />
 ---
