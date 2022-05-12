@@ -183,6 +183,7 @@ dependencies {
     runtime 'org.slf4j:jcl-over-slf4j:1.7.25'
     runtime 'org.slf4j:log4j-over-slf4j:1.7.25'
     compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+    compile 'org.openpnp:opencv:4.5.1-2'
 }
 
 jar {
@@ -207,6 +208,12 @@ distributions {
             from("build/bin") {
                 into 'bin'
             }
+            from("src/main/resources/detections/haarcascade_eye.xml") {
+                into 'bin'
+            }
+            from("src/main/resources/detections/haarcascade_frontalface_default.xml") {
+                into 'bin'
+            }
         }
     }
 
@@ -215,6 +222,12 @@ distributions {
             with distributions.main.contents
             from("build/reports")
             from("build/bin/interAACtionGaze-windows.bat") {
+                into 'bin'
+            }
+            from("src/main/resources/detections/haarcascade_eye.xml") {
+                into 'bin'
+            }
+            from("src/main/resources/detections/haarcascade_frontalface_default.xml") {
                 into 'bin'
             }
             from("build/jre/windows") {
@@ -233,6 +246,12 @@ distributions {
             from("build/bin/interAACtionGaze-linux-calibration.sh") {
                 into 'bin'
             }
+            from("src/main/resources/detections/haarcascade_eye.xml") {
+                into 'bin'
+            }
+            from("src/main/resources/detections/haarcascade_frontalface_default.xml") {
+                into 'bin'
+            }
             from("build/jre/linux-x64") {
                 into 'lib/jre'
             }
@@ -247,6 +266,12 @@ distributions {
             with distributions.main.contents
             from("build/reports")
             from("build/bin/interAACtionGaze-macos.sh") {
+                into 'bin'
+            }
+            from("src/main/resources/detections/haarcascade_eye.xml") {
+                into 'bin'
+            }
+            from("src/main/resources/detections/haarcascade_frontalface_default.xml") {
                 into 'bin'
             }
             from("build/jre/macos") {

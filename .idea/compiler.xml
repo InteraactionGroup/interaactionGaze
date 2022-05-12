@@ -26,6 +26,8 @@
       <module name="com.github.interaactionGaze.interaactionGaze" target="11" />
       <module name="com.github.interaactionGaze.interaactionGaze.main" target="11" />
       <module name="com.github.interaactionGaze.interaactionGaze.test" target="11" />
+      <module name="interAACtionGaze.main" target="11" />
+      <module name="interAACtionGaze.test" target="11" />
       <module name="untitled" target="11" />
       <module name="untitled.main" target="11" />
       <module name="untitled.test" target="11" />

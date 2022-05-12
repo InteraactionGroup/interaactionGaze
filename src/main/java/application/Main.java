@@ -4,6 +4,7 @@ import application.ui.*;
 import gaze.MouseInfo;
 import gaze.devicemanager.GazeDeviceManagerFactory;
 import gaze.devicemanager.TobiiGazeDeviceManager;
+import gaze.devicemanager.Webcam;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
@@ -37,6 +38,8 @@ public class Main extends Application {
     MainPane home;
     @Getter
     MouseInfo mouseInfo;
+    @Getter
+    Webcam webcam;
     @Getter
     OptionsPane optionsPane;
     @Getter
@@ -84,11 +87,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        nu.pattern.OpenCV.loadShared();
+
         primaryStage.setWidth(600);
         primaryStage.setHeight(250);
         primaryStage.setTitle("InteraactionGaze");
 
         mouseInfo = new MouseInfo();
+        webcam = new Webcam();
         CalibrationConfig calibrationConfig = new CalibrationConfig();
         gazeDeviceManager = GazeDeviceManagerFactory.getInstance().createNewGazeListener(this, calibrationConfig);
 
