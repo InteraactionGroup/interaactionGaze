@@ -239,6 +239,9 @@ distributions {
             from("build/tobiiDrivers") {
                 into 'tobiiDrivers'
             }
+            from("webcam") {
+                into 'bin'
+            }
         }
     }
 

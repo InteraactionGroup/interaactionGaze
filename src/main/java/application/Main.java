@@ -2,6 +2,7 @@ package application;
 
 import application.ui.*;
 import gaze.MouseInfo;
+import gaze.WebCam;
 import gaze.devicemanager.GazeDeviceManagerFactory;
 import gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Application;
@@ -41,6 +42,8 @@ public class Main extends Application {
     OptionsPane optionsPane;
     @Getter
     OptionsCalibrationPane optionsCalibrationPane;
+    @Getter
+    WebCam webcam;
 
     DecoratedPane decoratedPane;
 
@@ -89,6 +92,7 @@ public class Main extends Application {
         primaryStage.setTitle("InteraactionGaze");
 
         mouseInfo = new MouseInfo();
+        webcam = new WebCam();
         CalibrationConfig calibrationConfig = new CalibrationConfig();
         gazeDeviceManager = GazeDeviceManagerFactory.getInstance().createNewGazeListener(this, calibrationConfig);
 

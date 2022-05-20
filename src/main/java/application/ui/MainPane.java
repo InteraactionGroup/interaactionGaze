@@ -11,6 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainPane extends BorderPane {
 
     boolean running = false;
@@ -24,7 +26,9 @@ public class MainPane extends BorderPane {
         this.setWidth(600);
         this.setHeight(200);
 
-        Button startstop = createStartStopButton(main, primaryStage);
+        Button startStopEyeTracker = createStartStopEyeTrackerButton(main, primaryStage);
+
+        Button startStopWebcam = createStartStopWebcamButton(main, primaryStage);
 
         Button hide = createHideButton(primaryStage);
 
@@ -33,7 +37,7 @@ public class MainPane extends BorderPane {
         Button options = createOptionsButton(main, primaryStage);
 
         //hbox = new HBox(startstop, hide, clickActivation, options);
-        hbox = new HBox(startstop, hide, options);
+        hbox = new HBox(startStopEyeTracker, startStopWebcam, hide, options);
         hbox.setSpacing(5);
         hbox.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(hbox, Pos.CENTER);
@@ -51,27 +55,54 @@ public class MainPane extends BorderPane {
         return image;
     }
 
-    public Button createStartStopButton(Main main, Stage primaryStage) {
-        Button startstop = new MainButton("Play");
-        startstop.setGraphic(createButtonImageView("images/white/play.png"));
-        startstop.getStyleClass().add("green");
-        startstop.setContentDisplay(ContentDisplay.TOP);
-        startstop.setPrefHeight(200);
-        startstop.setPrefWidth(495. / 5);
-        startstop.setOnAction((e) -> {
+    public Button createStartStopEyeTrackerButton(Main main, Stage primaryStage) {
+        Button startStopEyeTracker = new MainButton("Play Eye Tracker");
+        startStopEyeTracker.setGraphic(createButtonImageView("images/white/play.png"));
+        startStopEyeTracker.getStyleClass().add("green");
+        startStopEyeTracker.setContentDisplay(ContentDisplay.TOP);
+        startStopEyeTracker.setPrefHeight(200);
+        startStopEyeTracker.setPrefWidth(495. / 5);
+        startStopEyeTracker.setOnAction((e) -> {
             if (running) {
                 running = false;
                 main.getGazeDeviceManager().setPause(true);
-                startstop.setText("Play");
-                ((ImageView) startstop.getGraphic()).setImage(new Image("images/white/play.png"));
+                startStopEyeTracker.setText("Play Eye Tracker");
+                ((ImageView) startStopEyeTracker.getGraphic()).setImage(new Image("images/white/play.png"));
             } else {
                 running = true;
                 main.getGazeDeviceManager().setPause(false);
-                startstop.setText("Stop");
-                ((ImageView) startstop.getGraphic()).setImage(new Image("images/white/stop.png"));
+                startStopEyeTracker.setText("Stop Eye Tracker");
+                ((ImageView) startStopEyeTracker.getGraphic()).setImage(new Image("images/white/stop.png"));
             }
         });
-        return startstop;
+        return startStopEyeTracker;
+    }
+
+    public Button createStartStopWebcamButton(Main main, Stage primaryStage) {
+        Button startStopWebcam = new MainButton("Play Webcam");
+        startStopWebcam.setGraphic(createButtonImageView("images/white/play.png"));
+        startStopWebcam.getStyleClass().add("orange");
+        startStopWebcam.setContentDisplay(ContentDisplay.TOP);
+        startStopWebcam.setPrefHeight(200);
+        startStopWebcam.setPrefWidth(495. / 5);
+        startStopWebcam.setOnAction((e) -> {
+            if (running) {
+                running = false;
+                main.getWebcam().stopWebcam();
+                startStopWebcam.setText("Play Webcam");
+                ((ImageView) startStopWebcam.getGraphic()).setImage(new Image("images/white/play.png"));
+            } else {
+                running = true;
+                try {
+                    main.getWebcam().startWebcam();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                startStopWebcam.setText("Stop Webcam");
+                ((ImageView) startStopWebcam.getGraphic()).setImage(new Image("images/white/stop.png"));
+            }
+        });
+        return startStopWebcam;
     }
 
     public Button createHideButton(Stage primaryStage) {
