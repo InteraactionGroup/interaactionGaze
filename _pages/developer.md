@@ -6,7 +6,7 @@ toc: true
 ---
 
 ### Source code
-<img src="../assets/images/logo-github.png" alt="GitHub Logo "><br>
+<img src="../assets/images/logo-github.png" alt="GitHub Logo"><br>
 <a href="https://github.com/InteraactionGroup/interaactionGaze">Our GitHub</a>
 
 ### Readme
