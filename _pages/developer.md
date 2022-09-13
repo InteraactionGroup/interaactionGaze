@@ -9,6 +9,6 @@ toc: true
 <img src="../assets/images/logo-github.png" alt="GitHub Logo "><br>
 <a href="https://github.com/InteraactionGroup/interaactionGaze">Our GitHub</a>
 
-### APIs used
+### Readme
 <img src="../assets/images/file-text.png" alt="File logo"><br>
 <a href="https://github.com/InteraactionGroup/interaactionGaze/blob/master/README.md">Our readme</a>
