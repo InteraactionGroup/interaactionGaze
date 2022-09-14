@@ -12,3 +12,7 @@ toc: true
 ### Readme
 <img src="../assets/images/file-text.png" alt="File logo"><br>
 <a href="https://github.com/InteraactionGroup/interaactionGaze/blob/master/README.md">Our readme</a>
+
+### Website
+<img src="../assets/images/logo-website.png" alt="Website logo"><br>
+<a href="https://github.com/InteraactionGroup/InterAACtionPlayer/blob/master/WEBSITE.md">Our website</a>
