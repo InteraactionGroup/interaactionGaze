@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,11 @@ import java.util.LinkedList;
 public class MouseInfo {
     private static final int POINTS_TO_TEST = 10;
     public int DWELL_TIME = 2000;
+    public int SIZE_TARGET = 50;
+    public Color COLOR_BACKGROUND = Color.WHITE;
+    public double redColor = 1.0;
+    public double blueColor = 1.0;
+    public double greenColor = 1.0;
     LinkedList<Point2D> previousPosition = new LinkedList<>();
     @Getter
     @Setter

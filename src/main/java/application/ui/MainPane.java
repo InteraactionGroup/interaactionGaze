@@ -25,15 +25,13 @@ public class MainPane extends BorderPane {
         this.setHeight(200);
 
         Button startstop = createStartStopButton(main, primaryStage);
-
-        Button hide = createHideButton(primaryStage);
-
-        //Button clickActivation = createClickActivationButton(main, primaryStage);
-
         Button options = createOptionsButton(main, primaryStage);
 
+        //Button hide = createHideButton(primaryStage);
+        //Button clickActivation = createClickActivationButton(main, primaryStage);
+
         //hbox = new HBox(startstop, hide, clickActivation, options);
-        hbox = new HBox(startstop, hide, options);
+        hbox = new HBox(startstop, options);
         hbox.setSpacing(5);
         hbox.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(hbox, Pos.CENTER);
@@ -74,7 +72,7 @@ public class MainPane extends BorderPane {
         return startstop;
     }
 
-    public Button createHideButton(Stage primaryStage) {
+    /*public Button createHideButton(Stage primaryStage) {
         Button hide = new MainButton("Cacher le curseur");
         hide.setGraphic(createButtonImageView("images/white/hide.png"));
         hide.getStyleClass().add("blue");
@@ -95,7 +93,7 @@ public class MainPane extends BorderPane {
             }
         });
         return hide;
-    }
+    }*/
 
     /*public Button createClickActivationButton(Main main, Stage primaryStage) {
         Button clickActivation = new MainButton("Desactiver le click");

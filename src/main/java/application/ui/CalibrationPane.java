@@ -8,12 +8,16 @@ import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -64,11 +68,11 @@ public class CalibrationPane extends Pane {
         this.primaryStage = primaryStage;
         this.calibrationConfig = mainCalibrationConfig;
 
-        //this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         this.setFocusTraversable(true);
     }
 
     public void startCalibration(Main main, String data) {
+        this.setBackground(new Background(new BackgroundFill(main.getMouseInfo().COLOR_BACKGROUND, CornerRadii.EMPTY, Insets.EMPTY)));
         getChildren().clear();
         currentTest = 0;
         resetCalibrationPoints();
@@ -165,7 +169,6 @@ public class CalibrationPane extends Pane {
             calibrationConfig.get(currentTest).setCross(nextCross());
 
             resetTarget();
-
             target = new Circle(primaryScreenBounds.getHeight() / 5);
             target.setCenterX(calibrationCross.getLayoutX());
             target.setCenterY(calibrationCross.getLayoutY());
@@ -183,7 +186,7 @@ public class CalibrationPane extends Pane {
             target.addEventHandler(GazeEvent.GAZE_MOVED, event);
             gazeDeviceManager.addEventFilter(target);
 
-            setImgTarget();
+            setImgTarget(main);
             this.getChildren().add(target);
             addExitButton(main);
         }
@@ -248,9 +251,9 @@ public class CalibrationPane extends Pane {
         }
     }
 
-    public void setImgTarget(){
+    public void setImgTarget(Main main){
 
-        imgTarget = new Circle(50);
+        imgTarget = new Circle(main.getMouseInfo().SIZE_TARGET);
         imgTarget.setCenterX(calibrationCross.getLayoutX());
         imgTarget.setCenterY(calibrationCross.getLayoutY());
 

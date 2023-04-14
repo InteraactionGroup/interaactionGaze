@@ -1,6 +1,8 @@
 package application;
 
 import application.ui.*;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import gaze.MouseInfo;
 import gaze.devicemanager.GazeDeviceManagerFactory;
 import gaze.devicemanager.TobiiGazeDeviceManager;
@@ -16,13 +18,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import utils.CalibrationConfig;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -57,15 +60,36 @@ public class Main extends Application {
                 myWritter.write(args[0]);
             }else{
                 String userName = System.getProperty("user.name");
+
                 File myFolder = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze");
+                File defaultSettings = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\default");
+
                 boolean createFolder = myFolder.mkdirs();
-                log.info("Folder created, path = " + createFolder);
+                boolean createDefaultSettingsFolder = defaultSettings.mkdirs();
+
                 File myFile = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt");
                 if (!myFile.exists()){
                     myWritter = new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt", StandardCharsets.UTF_8);
                     myWritter.write("true");
-
                 }
+
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("FixationLength", 2000);
+                    json.put("SizeTarget", 50);
+                    json.put("RedColorBackground", "1.0");
+                    json.put("BlueColorBackground", "1.0");
+                    json.put("GreenColorBackground", "1.0");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\default\\defaultSettings.json"))) {
+                    out.write(json.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                log.info("Folder created, path = " + createFolder + ", " + createDefaultSettingsFolder);
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -116,6 +140,7 @@ public class Main extends Application {
             if (os.contains("win")){
                 String userName = System.getProperty("user.name");
                 myFile = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt");
+                this.loadDefaultSettings("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\default\\defaultSettings.json");
             }else {
                 myFile = new File("calibration.txt");
             }
@@ -139,6 +164,27 @@ public class Main extends Application {
         }
 
         primaryStage.show();
+    }
+
+    public void loadDefaultSettings(String path) {
+        try {
+            Object defaultSettings = new JsonParser().parse(new FileReader(path));
+            JsonObject jsonDefaultSettings = (JsonObject) defaultSettings;
+
+            String fixationLength = String.valueOf(jsonDefaultSettings.get("FixationLength"));
+            String sizeTarget = String.valueOf(jsonDefaultSettings.get("SizeTarget"));
+
+            double redColorBackground = Double.parseDouble(jsonDefaultSettings.get("RedColorBackground").getAsString());
+            double blueColorBackground = Double.parseDouble(jsonDefaultSettings.get("BlueColorBackground").getAsString());
+            double greenColorBackground = Double.parseDouble(jsonDefaultSettings.get("GreenColorBackground").getAsString());
+
+            this.mouseInfo.DWELL_TIME = Integer.parseInt(fixationLength);
+            this.mouseInfo.SIZE_TARGET = Integer.parseInt(sizeTarget);
+            this.mouseInfo.COLOR_BACKGROUND = Color.color(redColorBackground, blueColorBackground, greenColorBackground);
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void startMessageCalibration(Stage primaryStage, String data) {
