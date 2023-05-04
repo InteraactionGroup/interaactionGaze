@@ -96,10 +96,10 @@ public class CalibrationPane extends Pane {
         startCurrentTest(main);
     }
 
-    public void saveCalibration() {
+    public void saveCalibration(Main main) {
         calibrationConfig.setAllAngles();
         try {
-            calibrationConfig.save();
+            calibrationConfig.save(main);
             System.out.println("save done !");
         } catch (IOException e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class CalibrationPane extends Pane {
             imgTarget.setOpacity(0);
             resetTarget();
             calibrationCross.setOpacity(0);
-            saveCalibration();
+            saveCalibration(main);
             messageCalibration(main);
         } else {
             if (currentTest == TOP_LEFT) {

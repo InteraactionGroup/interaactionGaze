@@ -44,7 +44,11 @@ public class Main extends Application {
     OptionsPane optionsPane;
     @Getter
     OptionsCalibrationPane optionsCalibrationPane;
-
+    @Getter
+    CalibrationConfig calibrationConfig;
+    @Getter
+    ProfilsPane profilsPane;
+    @Getter
     DecoratedPane decoratedPane;
 
     public static void main(String[] args) {
@@ -62,9 +66,12 @@ public class Main extends Application {
                 String userName = System.getProperty("user.name");
 
                 File myFolder = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze");
-                File defaultSettings = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\default");
-
                 boolean createFolder = myFolder.mkdirs();
+
+                File profils = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils");
+                boolean createProfilsFolder = profils.mkdirs();
+
+                File defaultSettings = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\default");
                 boolean createDefaultSettingsFolder = defaultSettings.mkdirs();
 
                 File myFile = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt");
@@ -75,6 +82,7 @@ public class Main extends Application {
 
                 JSONObject json = new JSONObject();
                 try {
+                    json.put("Name", "Default");
                     json.put("FixationLength", 2000);
                     json.put("SizeTarget", 50);
                     json.put("RedColorBackground", "1.0");
@@ -83,13 +91,13 @@ public class Main extends Application {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\default\\defaultSettings.json"))) {
+                try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\default\\settings.json"))) {
                     out.write(json.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                log.info("Folder created, path = " + createFolder + ", " + createDefaultSettingsFolder);
+                log.info("Folder created, path = " + createFolder + ", " + createDefaultSettingsFolder + ", " + createProfilsFolder);
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -113,22 +121,22 @@ public class Main extends Application {
         primaryStage.setTitle("InteraactionGaze");
 
         mouseInfo = new MouseInfo();
-        CalibrationConfig calibrationConfig = new CalibrationConfig();
+        calibrationConfig = new CalibrationConfig(this);
         gazeDeviceManager = GazeDeviceManagerFactory.getInstance().createNewGazeListener(this, calibrationConfig);
 
         optionsPane = new OptionsPane(primaryStage, this);
+        profilsPane = new ProfilsPane(primaryStage, this);
         optionsCalibrationPane = new OptionsCalibrationPane(primaryStage, this, calibrationConfig);
         calibrationPane = new CalibrationPane(primaryStage, gazeDeviceManager, calibrationConfig);
         home = new MainPane(this, primaryStage);
 
-        decoratedPane = new DecoratedPane(primaryStage);
+        decoratedPane = new DecoratedPane(this, primaryStage);
         decoratedPane.setCenter(home);
 
         Scene calibScene = new Scene(decoratedPane, primaryStage.getWidth(), primaryStage.getHeight());
         calibScene.getStylesheets().add("style.css");
         primaryStage.setScene(calibScene);
         calibScene.setFill(Color.TRANSPARENT);
-        // calibrationPane.installEventHandler(primaryStage, this);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         this.getGazeDeviceManager().setPause(true);
@@ -140,7 +148,7 @@ public class Main extends Application {
             if (os.contains("win")){
                 String userName = System.getProperty("user.name");
                 myFile = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt");
-                this.loadDefaultSettings("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\default\\defaultSettings.json");
+                this.loadDefaultSettings("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\default\\settings.json");
             }else {
                 myFile = new File("calibration.txt");
             }
@@ -171,6 +179,7 @@ public class Main extends Application {
             Object defaultSettings = new JsonParser().parse(new FileReader(path));
             JsonObject jsonDefaultSettings = (JsonObject) defaultSettings;
 
+            String name = jsonDefaultSettings.get("Name").getAsString();
             String fixationLength = String.valueOf(jsonDefaultSettings.get("FixationLength"));
             String sizeTarget = String.valueOf(jsonDefaultSettings.get("SizeTarget"));
 
@@ -178,6 +187,7 @@ public class Main extends Application {
             double blueColorBackground = Double.parseDouble(jsonDefaultSettings.get("BlueColorBackground").getAsString());
             double greenColorBackground = Double.parseDouble(jsonDefaultSettings.get("GreenColorBackground").getAsString());
 
+            this.mouseInfo.nameUser = name;
             this.mouseInfo.DWELL_TIME = Integer.parseInt(fixationLength);
             this.mouseInfo.SIZE_TARGET = Integer.parseInt(sizeTarget);
             this.mouseInfo.COLOR_BACKGROUND = Color.color(redColorBackground, blueColorBackground, greenColorBackground);
@@ -221,6 +231,10 @@ public class Main extends Application {
 
     public void goToOptionsCalibration(Stage primaryStage){
         ((BorderPane) primaryStage.getScene().getRoot()).setCenter(this.getOptionsCalibrationPane());
+        primaryStage.getScene().setCursor(Cursor.DEFAULT);
+    }
+    public void goToProfils(Stage primaryStage){
+        ((BorderPane) primaryStage.getScene().getRoot()).setCenter(this.getProfilsPane());
         primaryStage.getScene().setCursor(Cursor.DEFAULT);
     }
 

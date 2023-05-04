@@ -23,6 +23,7 @@ public class MouseInfo {
     public double redColor = 1.0;
     public double blueColor = 1.0;
     public double greenColor = 1.0;
+    public String nameUser = "default";
     LinkedList<Point2D> previousPosition = new LinkedList<>();
     @Getter
     @Setter

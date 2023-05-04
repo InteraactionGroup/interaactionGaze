@@ -108,3 +108,10 @@
     -fx-border-radius: 15;
     -fx-background-radius: 16;
 }
+
+.profil {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-family: Futura;
+    -fx-translate-x: -320px;
+}

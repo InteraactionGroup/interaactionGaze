@@ -15,7 +15,6 @@ public class MainPane extends BorderPane {
 
     boolean running = false;
     boolean displayed = true;
-    //boolean iscancelled = false;
 
     HBox hbox;
 
@@ -25,13 +24,14 @@ public class MainPane extends BorderPane {
         this.setHeight(200);
 
         Button startstop = createStartStopButton(main, primaryStage);
+        Button profils = createProfilButton(main, primaryStage);
         Button options = createOptionsButton(main, primaryStage);
 
         //Button hide = createHideButton(primaryStage);
         //Button clickActivation = createClickActivationButton(main, primaryStage);
 
         //hbox = new HBox(startstop, hide, clickActivation, options);
-        hbox = new HBox(startstop, options);
+        hbox = new HBox(startstop, profils, options);
         hbox.setSpacing(5);
         hbox.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(hbox, Pos.CENTER);
@@ -70,6 +70,20 @@ public class MainPane extends BorderPane {
             }
         });
         return startstop;
+    }
+
+    public Button createProfilButton(Main main, Stage primaryStage){
+        Button profil = new MainButton("Profil");
+        profil.setGraphic(createButtonImageView("images/white/user.png"));
+        profil.getStyleClass().add("blue");
+        profil.setContentDisplay(ContentDisplay.TOP);
+        profil.setPrefHeight(200);
+        profil.setPrefWidth(495. / 5);
+        profil.setOnAction((e) -> {
+            main.goToProfils(primaryStage);
+        });
+
+        return profil;
     }
 
     /*public Button createHideButton(Stage primaryStage) {

@@ -1,6 +1,7 @@
 package application.ui;
 
 import application.Main;
+import com.google.gson.JsonParser;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -8,14 +9,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Objects;
 
 import static application.ui.MainPane.createButtonImageView;
 
+@Slf4j
 public class OptionsPane extends BorderPane {
 
     HBox hbox;
-
     int sizePref = 80;
+    TextField dwellTime;
+    TextField sizeTarget;
+    ColorPicker colorPicker;
 
     public OptionsPane(Stage primaryStage, Main main) {
         super();
@@ -34,7 +47,7 @@ public class OptionsPane extends BorderPane {
 
             Label fixationLabel = new Label("Temps de fixation:");
             Label milliSecondesLabel = new Label("ms");
-            TextField dwellTime = new TextField("" + main.getMouseInfo().DWELL_TIME);
+            dwellTime = new TextField("" + main.getMouseInfo().DWELL_TIME);
             dwellTime.setPrefWidth(sizePref);
 
             gridPane.add(fixationLabel, 0, 0);
@@ -58,7 +71,7 @@ public class OptionsPane extends BorderPane {
             // Size Target
 
             Label sizeTargetLabel = new Label("Taille des cibles:");
-            TextField sizeTarget = new TextField("" + main.getMouseInfo().SIZE_TARGET);
+            sizeTarget = new TextField("" + main.getMouseInfo().SIZE_TARGET);
             sizeTarget.setPrefWidth(sizePref);
             Label pourcentageLabel = new Label("%");
 
@@ -86,7 +99,7 @@ public class OptionsPane extends BorderPane {
             gridPane.add(colorChoiceLabel, 0, 2);
             colorChoiceLabel.getStyleClass().add("text");
 
-            ColorPicker colorPicker = new ColorPicker();
+            colorPicker = new ColorPicker();
             colorPicker.setValue(main.getMouseInfo().COLOR_BACKGROUND);
             colorPicker.setOnAction(e -> {
                 main.getMouseInfo().COLOR_BACKGROUND = colorPicker.getValue();
@@ -130,6 +143,7 @@ public class OptionsPane extends BorderPane {
         back.setPrefHeight(200);
         back.setPrefWidth(495. / 5);
         back.setOnAction((e) -> {
+            this.saveSettings(main);
             main.goToMain(primaryStage);
         });
         return back;
@@ -148,5 +162,40 @@ public class OptionsPane extends BorderPane {
             main.goToOptionsCalibration(primaryStage);
         });
         return settingsCalibration;
+    }
+
+    public void saveSettings(Main main){
+        if (!Objects.equals(main.getMouseInfo().nameUser, "default")){
+            String userName = System.getProperty("user.name");
+            File settings = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + main.getMouseInfo().nameUser + "\\settings.json");
+
+            if (settings.exists()){
+                boolean deleteFile = settings.delete();
+                log.info("Settings file deleted !" + deleteFile);
+            }
+
+            JSONObject json = new JSONObject();
+            try {
+                json.put("Name", main.getMouseInfo().nameUser);
+                json.put("FixationLength", main.getMouseInfo().DWELL_TIME);
+                json.put("SizeTarget", main.getMouseInfo().SIZE_TARGET);
+                json.put("RedColorBackground", String.valueOf(main.getMouseInfo().redColor));
+                json.put("BlueColorBackground", String.valueOf(main.getMouseInfo().blueColor));
+                json.put("GreenColorBackground", String.valueOf(main.getMouseInfo().greenColor));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + main.getMouseInfo().nameUser + "\\settings.json"))) {
+                out.write(json.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateSettings(String dwelltime, String targetSize, Color color){
+        this.dwellTime.setText(dwelltime);
+        this.sizeTarget.setText(targetSize);
+        this.colorPicker.setValue(color);
     }
 }
