@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static application.ui.MainPane.createButtonImageView;
@@ -185,7 +186,7 @@ public class OptionsPane extends BorderPane {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + main.getMouseInfo().nameUser + "\\settings.json"))) {
+            try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + main.getMouseInfo().nameUser + "\\settings.json", StandardCharsets.UTF_8))) {
                 out.write(json.toString());
             } catch (Exception e) {
                 e.printStackTrace();

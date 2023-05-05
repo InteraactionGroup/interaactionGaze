@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Objects;
@@ -337,7 +338,7 @@ public class ProfilsPane extends BorderPane {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + name + "\\settings.json"))) {
+        try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + name + "\\settings.json", StandardCharsets.UTF_8))) {
             out.write(json.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -373,7 +374,8 @@ public class ProfilsPane extends BorderPane {
     public void selectUser(Main main){
         try {
             String userName = System.getProperty("user.name");
-            Object settings = new JsonParser().parse(new FileReader("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + this.userSelected + "\\settings.json"));
+            FileReader fileReader = new FileReader("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\" + this.userSelected + "\\settings.json", StandardCharsets.UTF_8);
+            Object settings = new JsonParser().parse(fileReader);
             JsonObject jsonDefaultSettings = (JsonObject) settings;
 
             String name = jsonDefaultSettings.get("Name").getAsString();
@@ -393,7 +395,9 @@ public class ProfilsPane extends BorderPane {
             main.getCalibrationConfig().loadSave(main);
             main.getOptionsPane().updateSettings(fixationLength, sizeTarget, Color.color(redColorBackground, blueColorBackground, greenColorBackground));
 
-        } catch (FileNotFoundException e) {
+            fileReader.close();
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

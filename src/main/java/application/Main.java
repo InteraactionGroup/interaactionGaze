@@ -91,7 +91,7 @@ public class Main extends Application {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\default\\settings.json"))) {
+                try (PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\default\\settings.json", StandardCharsets.UTF_8))) {
                     out.write(json.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -176,7 +176,8 @@ public class Main extends Application {
 
     public void loadDefaultSettings(String path) {
         try {
-            Object defaultSettings = new JsonParser().parse(new FileReader(path));
+            FileReader fileReader = new FileReader(path, StandardCharsets.UTF_8);
+            Object defaultSettings = new JsonParser().parse(fileReader);
             JsonObject jsonDefaultSettings = (JsonObject) defaultSettings;
 
             String name = jsonDefaultSettings.get("Name").getAsString();
@@ -192,7 +193,9 @@ public class Main extends Application {
             this.mouseInfo.SIZE_TARGET = Integer.parseInt(sizeTarget);
             this.mouseInfo.COLOR_BACKGROUND = Color.color(redColorBackground, blueColorBackground, greenColorBackground);
 
-        } catch (FileNotFoundException e) {
+            fileReader.close();
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
