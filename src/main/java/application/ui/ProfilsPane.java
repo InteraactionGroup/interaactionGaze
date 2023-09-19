@@ -19,8 +19,6 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static application.ui.MainPane.createButtonImageView;
@@ -114,13 +112,13 @@ public class ProfilsPane extends BorderPane {
                         }
                     });
 
-                    Button selectDelete = new Button("Sélectionner");
+                    Button selectUser = new Button("Sélectionner");
                     HBox hbBtnSelect = new HBox(10);
                     hbBtnSelect.setAlignment(Pos.BOTTOM_LEFT);
-                    hbBtnSelect.getChildren().add(selectDelete);
+                    hbBtnSelect.getChildren().add(selectUser);
                     selectProfilGridPane.add(hbBtnSelect, 0, maxIndex+1);
 
-                    selectDelete.setOnAction( event -> {
+                    selectUser.setOnAction( event -> {
                         if (!Objects.equals(this.userSelected, "")){
                             this.isWindowsOpen = false;
                             this.selectUser(main);
@@ -129,11 +127,11 @@ public class ProfilsPane extends BorderPane {
                     });
                 }
 
-                Scene deleteProfilScene = new Scene(selectProfilGridPane, 400, 250);
-                deleteProfilScene.getStylesheets().add("style.css");
+                Scene selectProfilScene = new Scene(selectProfilGridPane, 400, 50 + (50 * listName.length));
+                selectProfilScene.getStylesheets().add("style.css");
 
                 selectProfilStage.setTitle("Supprimer un profil");
-                selectProfilStage.setScene(deleteProfilScene);
+                selectProfilStage.setScene(selectProfilScene);
                 selectProfilStage.setX(primaryStage.getX() + 100);
                 selectProfilStage.setY(primaryStage.getY() + 10);
 
@@ -179,7 +177,7 @@ public class ProfilsPane extends BorderPane {
                 final Text error = new Text();
                 addProfilGridPane.add(error, 1, 6);
 
-                Scene addProfilScene = new Scene(addProfilGridPane, 400, 200);
+                Scene addProfilScene = new Scene(addProfilGridPane, 400, 150);
                 addProfilScene.getStylesheets().add("style.css");
 
                 Stage addProfilStage = new Stage();
@@ -248,7 +246,7 @@ public class ProfilsPane extends BorderPane {
                     ToggleGroup groupNames = new ToggleGroup();
                     int maxIndex = 0;
 
-                    for (int i=0; i<listName.length; i++) {
+                    for (int i=1; i<listName.length; i++) {
                         RadioButton btnName = new RadioButton(listName[i]);
                         btnName.setToggleGroup(groupNames);
                         deleteProfilGridPane.add(btnName, 0, i+2);
@@ -287,7 +285,7 @@ public class ProfilsPane extends BorderPane {
                     });
                 }
 
-                Scene deleteProfilScene = new Scene(deleteProfilGridPane, 400, 250);
+                Scene deleteProfilScene = new Scene(deleteProfilGridPane, 400, 50 + (50 * (listName.length - 1)));
                 deleteProfilScene.getStylesheets().add("style.css");
 
                 deleteProfilStage.setTitle("Supprimer un profil");

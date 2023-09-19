@@ -1,7 +1,6 @@
 package application.ui;
 
 import application.Main;
-import com.google.gson.JsonParser;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
