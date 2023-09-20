@@ -10,17 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up JDK 11
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '11'
-          
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16   
+          java-version: '17'
 
       - name: Download JREs
         run: |
@@ -68,5 +64,5 @@ jobs:
           commit: "master"
           prerelease: true
           draft: false
-          artifacts: "./build/distributions/interAACtionGaze-linux.tar.gz,./build/distributions/interAACtionGaze-macos.tar.gz,./build/distributions/interAACtionGaze-noJRE.tar.gz,./build/distributions/interAACtionGaze-noJRE.zip,./build/distributions/interAACtionGaze-windows.zip,./build/distributions/interAACtionGaze-windows-x64-installer.exe"
+          artifacts: "./build/distributions/interAACtionGaze-linux.tar.gz,./build/distributions/interAACtionGaze-macos.tar.gz,./build/distributions/interAACtionGaze-windows.zip,./build/distributions/interAACtionGaze-windows-x64-installer.exe"
           

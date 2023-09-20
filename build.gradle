@@ -1,28 +1,28 @@
-buildscript {
-    group = 'com.github.InteraactionGroup'
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        jcenter()
-    }
-}
-
 plugins {
+    id 'java'
     id 'application'
     id 'distribution'
-    id 'jacoco'
-    id 'org.openjfx.javafxplugin' version '0.0.8'
-    id 'io.freefair.lombok' version '4.1.4'
-    id 'com.github.hierynomus.license-report' version '0.15.0'
-    id 'com.github.spotbugs' version '2.0.0'
-    id 'net.researchgate.release' version '2.6.0'
-    id "de.undercouch.download" version '4.0.4'
-    id 'org.springframework.boot' version '2.2.1.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id "org.openjfx.javafxplugin" version "0.1.0"
+    id "de.undercouch.download" version "5.5.0"
+    id "io.freefair.lombok" version "8.3"
+    id "com.github.spotbugs" version "5.1.3"
+    id "com.github.hierynomus.license-report" version "0.16.1"
+    id 'net.researchgate.release' version '3.0.2'
 }
 
-ext.javafxVersion = "11.0.2"
-// Make it available everywhere via the project ext:
+group 'main'
+ext.javafxVersion = "20.0.2"
+startScripts.enabled = false
+
+application {
+    mainClass = 'application.Main'
+}
+
+javafx {
+    version = javafxVersion
+    modules = ['javafx.base', 'javafx.controls', 'javafx.swing', 'javafx.media', 'javafx.web']
+}
+
 ext {
     Download = de.undercouch.gradle.tasks.download.Download
     download = download
@@ -33,156 +33,35 @@ apply from: "${rootDir}/gradle/jre.gradle"
 apply from: "${rootDir}/gradle/drivers.gradle"
 apply from: "${rootDir}/gradle/installer.gradle"
 
-javafx {
-    version = javafxVersion
-    modules = ['javafx.controls', 'javafx.swing', 'javafx.media', 'javafx.web']
-}
-
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'java'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'maven-publish'
-apply plugin: 'jacoco'
-apply plugin: 'org.openjfx.javafxplugin'
-apply plugin: 'io.freefair.lombok'
-apply plugin: 'com.github.hierynomus.license-report'
-apply plugin: 'com.github.spotbugs'
-apply plugin: 'distribution'
-
-sourceSets {
-    main {
-        resources {
-            srcDirs "src/resources"
-        }
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+        url = 'https://jitpack.io'
     }
 }
-
-allprojects {
-    group = 'com.github.interaactionGaze'
-
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        jcenter()
-
-        maven {
-            url = 'https://jitpack.io'
-        }
-    }
-}
-
-
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'maven-publish'
-    apply plugin: 'jacoco'
-    apply plugin: 'org.openjfx.javafxplugin'
-    apply plugin: 'io.freefair.lombok'
-    apply plugin: 'com.github.hierynomus.license-report'
-    apply plugin: 'com.github.spotbugs'
-    apply plugin: "pmd"
-    apply plugin: 'distribution'
-
-    sourceSets {
-        integrationTest {
-            java {
-                compileClasspath += main.output + test.output
-                runtimeClasspath += main.output + test.output
-                srcDir file('src/integration-test/java')
-            }
-            resources.srcDir file('src/integration-test/resources')
-        }
-    }
-
-    apply from: "${rootDir}/gradle/integration.gradle"
-
-    configurations {
-        integrationTestImplementation.extendsFrom testImplementation
-        integrationTestRuntime.extendsFrom testRuntime
-    }
-
-    javafx {
-        version = javafxVersion
-        modules = ['javafx.controls', 'javafx.swing', 'javafx.media', 'javafx.web']
-    }
-
-    spotbugs {
-        toolVersion = '4.0.0-beta3'
-
-        //ignoreFailures = false
-        //effort = "max"
-        //reportLevel = "high"
-        excludeFilter = file("spotbugs-exclude.xml")
-    }
-
-    spotbugsMain.enabled = spotbugsEnabled
-    spotbugsTest.enabled = spotbugsEnabled
-
-    downloadLicenses {
-        dependencyConfiguration = 'compileClasspath'
-        includeProjectDependencies = true
-    }
-
-    dependencies {
-        testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
-        testImplementation "org.testfx:testfx-core:4.0.16-alpha"
-        testImplementation "org.testfx:testfx-junit5:4.0.16-alpha"
-        testImplementation "org.testfx:openjfx-monocle:jdk-11+26"
-        testImplementation "org.jmockit:jmockit:1.49"
-        testImplementation "org.mockito:mockito-core:3.12.+"
-    }
-
-    sourceCompatibility = '11'
-
-    publishing {
-        publications {
-            maven(MavenPublication) {
-                from(components.java)
-            }
-        }
-    }
-
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-    }
-
-    test {
-        useJUnitPlatform()
-        if (project.hasProperty('excludeTests')) {
-            exclude project.property('excludeTests')
-        }
-    }
-
-    tasks.withType(Test) {
-        maxHeapSize = "3g"
-    }
-
-    jacoco {
-        toolVersion '0.8.3' // We need this version for JMockit to work.
-    }
-
-    tasks.jacocoTestReport.dependsOn('test')
-}
-
 
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.20'
-    compile 'com.github.GazePlay:TobiiStreamEngineForJava:5.0'
-    compile 'com.google.code.gson:gson:2.8.1'
-    compile 'org.rxtx:rxtx:2.1.7'
-    compile 'ch.qos.logback:logback-classic:1.2.1'
-    compile 'ch.qos.logback:logback-core:1.2.1'
-    compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'uk.org.lidalia:sysout-over-slf4j:1.0.2'
-    compile 'javax.media:jmf:2.1.1e'
-    implementation 'org.json:json:20090211'
-    compile 'ws.schild:jave-all-deps:2.5.0'
-    compile 'ws.schild:jave-core:2.5.0'
-    runtime 'org.slf4j:jcl-over-slf4j:1.7.25'
-    runtime 'org.slf4j:log4j-over-slf4j:1.7.25'
-    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+    implementation 'com.github.GazePlay:TobiiStreamEngineForJava:5.0'
+    implementation 'org.projectlombok:lombok:1.18.28'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+    implementation 'org.json:json:20230618'
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+
+    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+}
+
+spotbugs {
+    excludeFilter = file("spotbugs-exclude.xml")
+}
+
+test {
+    useJUnitPlatform()
 }
 
 jar {
@@ -192,7 +71,7 @@ jar {
                 "Implementation-Title": project.name,
                 "Implementation-Vendor": "Univ. Grenoble Alpes - LIG - GETALP",
                 "Main-Class": 'application.Main',
-                "Class-Path": configurations.runtime.collect { it.getName() }.join(' '),
+                "Class-Path": configurations.collect { it.getName() }.join(' '),
                 "JavaFX-Version": javafxVersion,
                 "Built-By": System.properties['user.name']
         )
@@ -200,16 +79,6 @@ jar {
 }
 
 distributions {
-    noJRE {
-        contents {
-            with distributions.main.contents
-            from("build/reports")
-            from("build/bin") {
-                into 'bin'
-            }
-        }
-    }
-
     windows {
         contents {
             with distributions.main.contents
@@ -256,7 +125,14 @@ distributions {
     }
 }
 
+downloadLicenses {
+    includeProjectDependencies = true
+    dependencyConfiguration = 'compile'
+}
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 tasks.jar.dependsOn('createLicence')
 
@@ -270,9 +146,35 @@ task createLicence(dependsOn: ['processResources'], type: Copy, group: 'license'
 
 task('downloadAndExtractLinuxDependecies').dependsOn('downloadAndExtractLinuxJREwithLibavPlugin', 'downloadAndExtractTobiiDriversForLinux')
 
-macosDistTar.dependsOn(downloadAndExtractMacosJRE)
-windowsDistZip.dependsOn(downloadAndExtractWindowsJRE)
-linuxDistTar.dependsOn(downloadAndExtractLinuxDependecies)
+macosDistZip{
+    dependsOn(downloadAndExtractMacosJRE)
+    dependsOn(scriptsForRelease)
+}
+
+macosDistTar {
+    dependsOn(downloadAndExtractMacosJRE)
+    dependsOn(scriptsForRelease)
+}
+
+windowsDistZip {
+    dependsOn(downloadAndExtractWindowsJRE)
+    dependsOn(scriptsForRelease)
+}
+
+windowsDistTar {
+    dependsOn(downloadAndExtractWindowsJRE)
+    dependsOn(scriptsForRelease)
+}
+
+linuxDistZip {
+    dependsOn(downloadAndExtractLinuxDependecies)
+    dependsOn(scriptsForRelease)
+}
+
+linuxDistTar {
+    dependsOn(downloadAndExtractLinuxDependecies)
+    dependsOn(scriptsForRelease)
+}
 
 tasks.withType(Tar){
     compression = Compression.GZIP
@@ -282,16 +184,8 @@ tasks.withType(Tar){
 distZip {
     duplicatesStrategy = 'exclude'
 }
-[bootJar, bootDistTar, bootDistZip]*.enabled = false
 
 release {
     failOnPublishNeeded = false
     failOnCommitNeeded = false
 }
-
-mainClassName = 'application.Main'
-
-defaultTasks 'clean', 'build'
-startScripts.enabled = false
-
-afterReleaseBuild.dependsOn generateWindowsInstallerInDocker

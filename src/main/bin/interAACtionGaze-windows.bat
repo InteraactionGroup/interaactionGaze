@@ -1,8 +1,7 @@
 @echo on
 
-SET SCRIPT_PATH=%~dp0
-SET JAR_PATH="%SCRIPT_PATH%..\lib\interAACtionGaze.jar"
-SET JAVA_HOME=%SCRIPT_PATH%..\lib\jre
-SET PATH=%JAVA_HOME%\bin;%PATH%;%LocalAppData%\TobiiStreamEngineForJava\lib\tobii\x64
+SET PATH=%~dp0..\lib\jre\bin;%PATH%;%LocalAppData%\TobiiStreamEngineForJava\lib\tobii\x64
+SET JAVAFX_LIB=%~dp0..\lib\*
+SET JAVAFX_MODULES=javafx.base,javafx.controls,javafx.graphics,javafx.media,javafx.swing,javafx.web
 
-start /min java -cp "..\lib\*" -Xms256m -Xmx1g -Dlogging.appender.console.level=OFF -jar %JAR_PATH%
+start /min java -cp "%JAVAFX_LIB%" --module-path ..\lib\ --add-modules %JAVAFX_MODULES% application.Main

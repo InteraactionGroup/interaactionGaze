@@ -10,6 +10,8 @@ task generateWindowsInstaller(dependsOn: ['unzipDistribution', 'prepareInnoSetup
             commandLine "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe", "${innoSetupDir}\\setup.iss"
         }
 
+        delete "${buildDir}/innosetup"
+        delete "${buildDir}/${project.name}-windows"
     }
 }
 
@@ -60,7 +62,6 @@ task prepareInnoSetupFiles(group: 'distribution') {
 
 task unzipDistribution(dependsOn: ['packageApp'], type: Copy, group: 'distribution') {
     from zipTree("${buildDir}/distributions/${project.name}-windows.zip")
-    into buildDir
-    fileMode 0777
-    dirMode 0777
+    into "${buildDir}"
+    doNotTrackState("Cannot access a file in the destination directory")
 }
