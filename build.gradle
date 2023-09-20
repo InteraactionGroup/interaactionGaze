@@ -20,7 +20,7 @@ application {
 
 javafx {
     version = javafxVersion
-    modules = ['javafx.base', 'javafx.controls', 'javafx.swing', 'javafx.media', 'javafx.web']
+    modules = ['javafx.base', 'javafx.controls', 'javafx.swing', 'javafx.media', 'javafx.web', 'javafx.graphics']
 }
 
 ext {
