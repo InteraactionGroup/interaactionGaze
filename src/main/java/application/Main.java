@@ -56,10 +56,41 @@ public class Main extends Application {
 
         try {
             if (os.contains("nux") || os.contains("mac")){
-                File myFile = new File("calibration.txt");
-                log.info(String.valueOf(myFile));
-                myWritter = new FileWriter("calibration.txt", StandardCharsets.UTF_8);
-                myWritter.write(args[0]);
+
+                File myFolder = new File("~/Documents/interAACtionGaze");
+                boolean createFolder = myFolder.mkdirs();
+
+                File profils = new File("~/Documents/interAACtionGaze/profils");
+                boolean createProfilsFolder = profils.mkdirs();
+
+                File defaultSettings = new File("~/Documents/interAACtionGaze/profils/default");
+                boolean createDefaultSettingsFolder = defaultSettings.mkdirs();
+
+                File myLinuxFile = new File("~/Documents/interAACtionGaze/calibration.txt");
+                if (!myLinuxFile.exists()){
+                    myWritter = new FileWriter("~/Documents/interAACtionGaze/calibration.txt", StandardCharsets.UTF_8);
+                    myWritter.write("true");
+                }
+
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("Name", "Default");
+                    json.put("FixationLength", 2000);
+                    json.put("SizeTarget", 50);
+                    json.put("RedColorBackground", "1.0");
+                    json.put("BlueColorBackground", "1.0");
+                    json.put("GreenColorBackground", "1.0");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try (PrintWriter out = new PrintWriter(new FileWriter("~/Documents/interAACtionGaze/profils/default/settings.json", StandardCharsets.UTF_8))) {
+                    out.write(json.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                log.info("Folder created, path = " + createFolder + ", " + createDefaultSettingsFolder + ", " + createProfilsFolder);
+
             }else{
                 String userName = System.getProperty("user.name");
 
@@ -72,8 +103,8 @@ public class Main extends Application {
                 File defaultSettings = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\default");
                 boolean createDefaultSettingsFolder = defaultSettings.mkdirs();
 
-                File myFile = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt");
-                if (!myFile.exists()){
+                File myWindowsFile = new File("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt");
+                if (!myWindowsFile.exists()){
                     myWritter = new FileWriter("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\calibration.txt", StandardCharsets.UTF_8);
                     myWritter.write("true");
                 }
@@ -149,6 +180,7 @@ public class Main extends Application {
                 this.loadDefaultSettings("C:\\Users\\" + userName + "\\Documents\\interAACtionGaze\\profils\\default\\settings.json");
             }else {
                 myFile = new File("calibration.txt");
+                this.loadDefaultSettings("~/Documents/interAACtionGaze/profils/default/settings.json");
             }
 
             Scanner myReader = new Scanner(myFile, StandardCharsets.UTF_8);

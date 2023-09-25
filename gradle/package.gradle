@@ -1,14 +1,21 @@
-task('packageAllDists').dependsOn('linuxDistTar', 'windowsDistZip', 'macosDistTar')
+task('packageAllDists').dependsOn('linuxDistTar', 'windowsDistZip', 'macosDistTar', 'assembleNoJREDist')
 
 task packageApp(dependsOn: ['packageAllDists',
                             'downloadLicenses',
                             'scriptsForRelease'], group: 'distribution') {
+    tasks.findByName('packageAllDists').mustRunAfter('downloadLicenses')
     tasks.findByName('packageAllDists').mustRunAfter('scriptsForRelease')
 }
 
-task scriptsForRelease(dependsOn: ['downloadLicenses'], type: Copy, group: 'distribution') {
+task scriptsForRelease(type: Copy, group: 'distribution') {
     from "${rootDir}/src/main/bin"
     into "${rootDir}/build/bin"
 
-    outputs.upToDateWhen { false }
+    outputs.upToDateWhen { false } // Forces the task to rerun every time, without requiring a clean.
 }
+
+task packageAppWithDistPermissions(dependsOn: packageApp, type: Exec, group: 'distribution') {
+    commandLine 'chmod', '-R', '777', "${rootDir}/build/distributions"
+}
+
+beforeReleaseBuild.dependsOn packageAppWithDistPermissions

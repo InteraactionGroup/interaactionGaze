@@ -17,11 +17,6 @@ if [ -f "$File" ]; then
 
     set -e
 
-    MAIN_JAR_FILE=interAACtionGaze.jar
-
-    export JAVA_OPTS="-Xms256m -Xmx1g"
-    export JAVA_OPTS="$JAVA_OPTS -Dlogging.appender.console.level=OFF -Djdk.gtk.version=2"
-
     WORKING_DIR=$(pwd)
 
     echo "WORKING_DIR = ${WORKING_DIR}"
@@ -48,7 +43,7 @@ if [ -f "$File" ]; then
 
     echo "PATH = ${PATH}"
 
-    export JAVA_CMD="java -cp \"$CLASSPATH\" ${JAVA_OPTS} -jar "$LIB_DIR"/interAACtionGaze.jar false"
+    export JAVA_CMD="java -cp \"$CLASSPATH\" --module-path $LIB_DIR --add-modules javafx.base,javafx.controls,javafx.graphics,javafx.media,javafx.swing,javafx.web application.Main false"
 
     echo "Executing command line: $JAVA_CMD"
 
@@ -61,11 +56,6 @@ else
   echo "true" > $File
 
   set -e
-
-  MAIN_JAR_FILE=interAACtionGaze.jar
-
-  export JAVA_OPTS="-Xms256m -Xmx1g"
-  export JAVA_OPTS="$JAVA_OPTS -Dlogging.appender.console.level=OFF -Djdk.gtk.version=2"
 
   WORKING_DIR=$(pwd)
 
@@ -93,7 +83,7 @@ else
 
   echo "PATH = ${PATH}"
 
-  export JAVA_CMD="java -cp \"$CLASSPATH\" ${JAVA_OPTS} -jar "$LIB_DIR"/interAACtionGaze.jar false"
+  export JAVA_CMD="java -cp \"$CLASSPATH\" --module-path $LIB_DIR --add-modules javafx.base,javafx.controls,javafx.graphics,javafx.media,javafx.swing,javafx.web application.Main false"
 
   echo "Executing command line: $JAVA_CMD"
 

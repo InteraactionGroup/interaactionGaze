@@ -23,4 +23,3 @@ task downloadAndExtractTobiiDriversForLinux(dependsOn: extractTobiiDriversForLin
         delete "${tobiiDriversForLinux}/${tobiiDriverFilename}"
     }
 }
-
