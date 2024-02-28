@@ -118,6 +118,7 @@ public class Main extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
         primaryStage.getScene().setRoot(this.getCalibrationPane());
+        this.getGazeDeviceManager().setPause(false);
         calibrationPane.startCalibration(this, data);
     }
 

@@ -12,7 +12,6 @@ import tobii.Tobii;
 import utils.CalibrationConfig;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -28,6 +27,7 @@ public class TobiiGazeDeviceManager extends AbstractGazeDeviceManager {
     private Boolean alreadyStarted = false;
     public Timeline checkTobii;
     public Boolean tobiiEnabled = false;
+    public Boolean eyeTrackerStatus = false;
 
     public TobiiGazeDeviceManager(Main main, CalibrationConfig calibrationConfig) {
         super();
@@ -63,7 +63,7 @@ public class TobiiGazeDeviceManager extends AbstractGazeDeviceManager {
                 new KeyFrame(Duration.millis(5000)));
         checkTobii.setOnFinished((e) -> {
             float[] eyeTrackerNextPosition = Tobii.gazePosition();
-            Boolean eyeTrackerStatus = (eyeTrackerPosition[0] != eyeTrackerNextPosition[0] || eyeTrackerPosition[1] != eyeTrackerNextPosition[1]);
+            eyeTrackerStatus = (eyeTrackerPosition[0] != eyeTrackerNextPosition[0] || eyeTrackerPosition[1] != eyeTrackerNextPosition[1]);
             main.getDecoratedPane().updateEyeTracker(eyeTrackerStatus);
 
             if (eyeTrackerStatus) {
