@@ -6,31 +6,50 @@ toc: true
 toc_sticky: true
 ---
 
-## Beginning
+{% include figure image_path="/assets/userGuideImages/mainMenu.png" alt="InteraactionGaze" caption="This is what the main menu of InterAACtionGaze looks like" %}
 
-{% include figure image_path="/assets/userGuideImages/interaactionGaze.png" alt="InteraactionGaze" caption="This is what InteraactionGaze looks like on the 1st connection" %}
+## Title bar
 
-## Play/Stop
-{% include figure image_path="/assets/userGuideImages/Play.png" alt="Play" caption="Click on play to activate the mouse control with the eyetracker." %}
-{% include figure image_path="/assets/userGuideImages/stop.png" alt="Stop" caption="stop will turn it off." %}
+This bar contains :
+ - A text that tells us which profile we are on
+ - A text that tells us whether or not our Eye Tracker is connected
+ - A ping-shaped button which allows you to choose whether you want to put Gaze in the foreground
+ - A button to minimize Gaze
+ - A button to exit Gaze
 
-## Display/hide the cursor
-{% include figure image_path="/assets/userGuideImages/AfficherLeCurseur.png" alt="Afficher le curseur" caption="Displays the mouse cursor." %}
-{% include figure image_path="/assets/userGuideImages/CacherLeCurseur.png" alt="Cacher le curseur" caption="Hides the mouse cursor." %}
 
-## Enable/disable the click
-{% include figure image_path="/assets/userGuideImages/ActiverLeClic.png" alt="Activer le clic" caption="Enable click allows you to click on an element while keeping your eyes fixed on the element to be clicked." %}
-{% include figure image_path="/assets/userGuideImages/DesactiverLeClic.png" alt="Desactiver le clic" caption="Click a second time to disable this feature." %}
+## Main menu
 
-## Settings
-{% include figure image_path="/assets/userGuideImages/Options.png" alt="options" caption="Clicking on options takes you to the options page." %}
+The main menu contains :
+- A green button which allows you to activate the movement of the mouse with the eye tracker
+- A blue button which allows you to choose/create/delete a profile
+- A purple button which allows you to hide or show the mouse cursor <br>
+(If you exit the application while the mouse cursor is hidden, we redisplay it)
+- A orange button which allows you to activate or not the mouse click when you stare at a place for a moment (= fixation time chosen in the options)
+- A red button which allows access to the software options
 
-### Back
-{% include figure image_path="/assets/userGuideImages/retour.png" alt="retour" caption="The back button allows you to return to the previous page." %}
+### Play/Stop
 
-### Calibrate
-{% include figure image_path="/assets/userGuideImages/calibrer.png" alt="calibrer" caption="Launches the calibration tool, you will need to fix the indicated locations to improve the accuracy of the eyetracker." %}
+When you start moving the mouse with your gaze (green button), the Gaze application transforms into a red dot that you can move with Drag&Drop. <br>
+To exit this mode, you must double click on this red dot.
 
-### Dwell time
-{% include figure image_path="/assets/userGuideImages/tempsDeFixation.png" alt="tempsDeFixation" caption="The dwell time is the setting that allows you to increase or decrease the time needed before a button is triggered by the eyetracker." %}
 
+### Profile
+
+{% include figure image_path="/assets/userGuideImages/profilMenu.png" alt="InteraactionGaze profile menu"%}
+
+In this section, we can :
+- Choose a profile and load his configuration
+- Create a profile
+- Delete a profile
+
+### Options
+
+{% include figure image_path="/assets/userGuideImages/optionMenu.png" alt="InteraactionGaze option menu"%}
+
+In this section, we can :
+- Start a calibration
+- Choose an image from several choices for targets during calibration
+- Choose the fixation time
+- Choose target sizes for calibration
+- Choose wallpaper color during calibration

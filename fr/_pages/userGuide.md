@@ -7,30 +7,49 @@ toc_label: "Sur cette page"
 toc_sticky: true
 ---
 
-## Commencement
+{% include figure image_path="/assets/userGuideImages/mainMenu.png" alt="InteraactionGaze" caption="Voici à quoi ressemble le menu principal d'InterAACtionGaze" %}
 
-{% include figure image_path="/assets/userGuideImages/interaactionGaze.png" alt="InteraactionGaze" caption="Voilà à quoi ressemble InteraactionGaze lors de la 1er connexion." %}
+## Barre de titre
 
-## Play/Stop
-{% include figure image_path="/assets/userGuideImages/Play.png" alt="Play" caption="Cliquer sur play pour activer le contrôle de la souris avec l'eyetracker." %}
-{% include figure image_path="/assets/userGuideImages/stop.png" alt="Stop" caption="stop le désactivera." %}
+Cette barre contient :
+- Un texte qui nous indique sur quel profil nous sommes
+- Un texte qui nous indique si notre Eye Tracker est connecté ou non
+- Un bouton en forme de ping qui permet de choisir si l'on souhaite mettre Gaze au premier plan
+- Un bouton pour minimiser le regard
+- Un bouton pour quitter Gaze
 
-## Afficher/Cacher le curseur
-{% include figure image_path="/assets/userGuideImages/AfficherLeCurseur.png" alt="Afficher le curseur" caption="Affiche le curseur de la souris." %}
-{% include figure image_path="/assets/userGuideImages/CacherLeCurseur.png" alt="Cacher le curseur" caption="Cache le curseur de la souris." %}
 
-## Activer/Desactiver le clic
-{% include figure image_path="/assets/userGuideImages/ActiverLeClic.png" alt="Activer le clic" caption="Activer le clic permet de pouvoir cliquer sur un élément en laissant le regard fixé sur l'élément à cliquer." %}
-{% include figure image_path="/assets/userGuideImages/DesactiverLeClic.png" alt="Desactiver le clic" caption="Cliquer une seconde fois pour désactiver cette fonctionnalité." %}
+## Menu principal
 
-## Options
-{% include figure image_path="/assets/userGuideImages/Options.png" alt="options" caption="Cliquer sur options vous envoie à la page d'option." %}
+Le menu principal contient :
+- Un bouton vert qui permet d'activer le mouvement de la souris avec l'eye tracker
+- Un bouton bleu qui permet de choisir/créer/supprimer un profil
+- Un bouton violet qui permet de masquer ou d'afficher le curseur de la souris <br>
+  (Si vous quittez l'application alors que le curseur de la souris est masqué, nous le réaffichons)
+- Un bouton orange qui permet d'activer ou non le clic de souris lorsque vous fixez un endroit un instant (= temps de fixation choisi dans les options)
+- Un bouton rouge qui permet d'accéder aux options du logiciel
 
-### Retour
-{% include figure image_path="/assets/userGuideImages/retour.png" alt="retour" caption="Le bouton retour permet de revenir à la page précédente." %}
+### Play/Stop
 
-### Calibrer
-{% include figure image_path="/assets/userGuideImages/calibrer.png" alt="calibrer" caption="Lance l'outil de calibration, vous devrez fixer les endroits indiqués pour améliorer la précision de l'eyetracker." %}
+Lorsque vous commencez à déplacer la souris avec votre regard (bouton vert), l'application Gaze se transforme en un point rouge que vous pouvez déplacer par Glisser&Déposer. <br>
+Pour sortir de ce mode, vous devez double-cliquer sur ce point rouge.
 
-### Temps de fixation
-{% include figure image_path="/assets/userGuideImages/tempsDeFixation.png" alt="tempsDeFixation" caption="Le temps de fixation est le réglage qui permet d'augmenter ou de diminuer le temps nécessaire avant qu'un bouton ne soit déclencher par l'eyetracker." %}
+### Profile
+
+{% include figure image_path="/assets/userGuideImages/profilMenu.png" alt="InteraactionGaze profile menu"%}
+
+Dans cette rubrique, nous pouvons :
+- Choisir un profil et charger sa configuration
+- Créer un profil
+- Supprimer un profil
+
+### Options
+
+{% include figure image_path="/assets/userGuideImages/optionMenu.png" alt="InteraactionGaze option menu"%}
+
+Dans cette rubrique, nous pouvons :
+- Démarrer un étalonnage
+- Choisissez une image parmi plusieurs choix de cibles lors de l'étalonnage
+- Choisissez le temps de fixation
+- Choisissez les tailles cibles pour l'étalonnage
+- Choisissez la couleur du papier peint lors du calibrage
