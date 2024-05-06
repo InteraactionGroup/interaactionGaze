@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import utils.CalibrationConfig;
+import utils.CommandShortcut;
 import utils.Settings;
 
 @Slf4j
@@ -44,6 +45,7 @@ public class Main extends Application {
     EyeTrackerPane eyeTrackerPane;
     @Getter
     Settings settings;
+    CommandShortcut commandShortcut;
 
     public int width = 600;
     public int height = 250;
@@ -71,6 +73,7 @@ public class Main extends Application {
         calibrationPane = new CalibrationPane(primaryStage, gazeDeviceManager, calibrationConfig);
         home = new MainPane(this, primaryStage);
         settings = new Settings(this);
+        commandShortcut = new CommandShortcut(home);
 
         decoratedPane.setCenter(home);
         Scene calibScene = new Scene(decoratedPane, primaryStage.getWidth(), primaryStage.getHeight());
@@ -89,6 +92,7 @@ public class Main extends Application {
         primaryStage.show();
 
         this.settings.loadDefaultSettings(primaryStage);
+        this.commandShortcut.launch();
     }
 
     public void startMessageCalibration(Stage primaryStage, String data) {

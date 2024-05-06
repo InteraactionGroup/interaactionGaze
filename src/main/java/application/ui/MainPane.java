@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 public class MainPane extends BorderPane {
 
+    public Button startstop;
+
     boolean displayed = true;
     HBox hbox;
 
@@ -43,7 +45,7 @@ public class MainPane extends BorderPane {
     }
 
     public Button createStartStopButton(Main main, Stage primaryStage) {
-        Button startstop = new MainButton("Play");
+        startstop = new MainButton("Play");
         startstop.setGraphic(createButtonImageView("images/white/play.png"));
         startstop.getStyleClass().add("green");
         startstop.setContentDisplay(ContentDisplay.TOP);
