@@ -1,27 +1,16 @@
 package application.ui;
 
 import application.Main;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
-
 import static application.ui.MainPane.createButtonImageView;
 @Slf4j
 public class ProfilsPane extends BorderPane {

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -53,6 +54,7 @@ public class Settings {
                     json.put("RedColorBackground", "1.0");
                     json.put("BlueColorBackground", "1.0");
                     json.put("GreenColorBackground", "1.0");
+                    json.put("PlayCommand", "G-A");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -90,6 +92,7 @@ public class Settings {
                     json.put("RedColorBackground", "1.0");
                     json.put("BlueColorBackground", "1.0");
                     json.put("GreenColorBackground", "1.0");
+                    json.put("PlayStopCommand", "G-A");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -155,6 +158,8 @@ public class Settings {
             String fixationLength = String.valueOf(jsonDefaultSettings.get("FixationLength"));
             String sizeTarget = String.valueOf(jsonDefaultSettings.get("SizeTarget"));
 
+            String playCommand = String.valueOf(jsonDefaultSettings.get("PlayStopCommand")).replace("\"", "");
+
             double redColorBackground = Double.parseDouble(jsonDefaultSettings.get("RedColorBackground").getAsString());
             double blueColorBackground = Double.parseDouble(jsonDefaultSettings.get("BlueColorBackground").getAsString());
             double greenColorBackground = Double.parseDouble(jsonDefaultSettings.get("GreenColorBackground").getAsString());
@@ -163,6 +168,8 @@ public class Settings {
             main.getMouseInfo().DWELL_TIME = Integer.parseInt(fixationLength);
             main.getMouseInfo().SIZE_TARGET = Integer.parseInt(sizeTarget);
             main.getMouseInfo().COLOR_BACKGROUND = Color.color(redColorBackground, blueColorBackground, greenColorBackground);
+
+            main.getCommandShortcut().playCommand = playCommand.split("-");
 
             fileReader.close();
 

@@ -2,6 +2,7 @@ package application.ui;
 
 import application.Main;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -29,6 +30,8 @@ public class OptionsPane extends BorderPane {
     TextField dwellTime;
     TextField sizeTarget;
     ColorPicker colorPicker;
+
+    CommandShortcutPane commandShortcutPane;
 
     public OptionsPane(Main main, Stage primaryStage) {
         super();
@@ -110,7 +113,21 @@ public class OptionsPane extends BorderPane {
 
             colorPicker.setPrefWidth(sizePref);
             gridPane.add(colorPicker, 1, 2);
+
+            Label commandShortcutLabel = new Label("Changer les raccourcis:");
+            gridPane.add(commandShortcutLabel, 0, 3);
+            commandShortcutLabel.getStyleClass().add("text");
+
+            Button commandShortcut = new Button("Raccourcis");
+            commandShortcut.setOnAction((event -> {
+                this.commandShortcutPane = new CommandShortcutPane(main, primaryStage);
+                ((BorderPane) primaryStage.getScene().getRoot()).setCenter(this.commandShortcutPane);
+                primaryStage.getScene().setCursor(Cursor.DEFAULT);
+            }));
+            commandShortcut.setPrefWidth(sizePref);
+            gridPane.add(commandShortcut, 1, 3);
         }
+
         hbox = new HBox(back, calibrate, settingsCalibration, gridPane);
         hbox.setSpacing(5);
         hbox.setAlignment(Pos.CENTER);
@@ -183,6 +200,7 @@ public class OptionsPane extends BorderPane {
                 json.put("RedColorBackground", String.valueOf(main.getMouseInfo().redColor));
                 json.put("BlueColorBackground", String.valueOf(main.getMouseInfo().blueColor));
                 json.put("GreenColorBackground", String.valueOf(main.getMouseInfo().greenColor));
+                json.put("PlayStopCommand", main.getCommandShortcut().playCommand[0] + "-" + main.getCommandShortcut().playCommand[1]);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -13,12 +13,16 @@ import javafx.stage.Stage;
 
 public class EyeTrackerPane extends BorderPane {
 
+    Main main;
+    Stage primaryStage;
     private double xOffset = 0;
     private double yOffset = 0;
     HBox hbox;
 
     public EyeTrackerPane(Main main, Stage primaryStage){
         super();
+        this.main = main;
+        this.primaryStage = primaryStage;
 
         Button stop = addStopButton(main, primaryStage);
 

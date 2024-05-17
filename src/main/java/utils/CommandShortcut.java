@@ -1,6 +1,9 @@
 package utils;
 
+import application.Main;
+import application.ui.EyeTrackerPane;
 import application.ui.MainPane;
+import javafx.stage.Stage;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -13,11 +16,20 @@ import java.util.logging.Logger;
 public class CommandShortcut implements NativeKeyListener {
 
     private String keySelected = "";
+    public String[] playCommand;
 
+    Main main;
+    Stage primaryStage;
     MainPane mainPane;
+    EyeTrackerPane eyeTrackerPane;
 
-    public CommandShortcut(MainPane mainPane) {
+    boolean running = false;
+
+    public CommandShortcut(Main main, Stage primaryStage, MainPane mainPane, EyeTrackerPane eyeTrackerPane) {
+        this.main = main;
+        this.primaryStage = primaryStage;
         this.mainPane = mainPane;
+        this.eyeTrackerPane = eyeTrackerPane;
     }
 
     @Override
@@ -31,8 +43,20 @@ public class CommandShortcut implements NativeKeyListener {
             this.keySelected = NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode());
         }
 
-        if (Objects.equals(this.keySelected, "G") && NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).equals("A")){
-            mainPane.startstop.fire();
+        if (Objects.equals(this.keySelected, this.playCommand[0]) && NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).equals(this.playCommand[1])){
+            if (running){
+                this.running = false;
+                primaryStage.setWidth(main.width);
+                primaryStage.setHeight(main.height);
+                main.getGazeDeviceManager().setPause(true);
+                main.goToMain(primaryStage);
+                main.getGazeDeviceManager().startCheckTobii();
+            }else {
+                this.running = true;
+                main.getGazeDeviceManager().setPause(false);
+                main.goToEyeTracker(primaryStage);
+                main.getGazeDeviceManager().stopCheckTobii();
+            }
         }
     }
 

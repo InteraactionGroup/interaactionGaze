@@ -52,9 +52,9 @@ public class MainPane extends BorderPane {
         startstop.setPrefHeight(200);
         startstop.setPrefWidth(495. / 5);
         startstop.setOnAction((e) -> {
-            main.getGazeDeviceManager().setPause(false);
-            main.goToEyeTracker(primaryStage);
-            main.getGazeDeviceManager().stopCheckTobii();
+                main.getGazeDeviceManager().setPause(false);
+                main.goToEyeTracker(primaryStage);
+                main.getGazeDeviceManager().stopCheckTobii();
         });
         return startstop;
     }

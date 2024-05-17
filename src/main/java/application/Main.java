@@ -45,6 +45,7 @@ public class Main extends Application {
     EyeTrackerPane eyeTrackerPane;
     @Getter
     Settings settings;
+    @Getter
     CommandShortcut commandShortcut;
 
     public int width = 600;
@@ -72,8 +73,8 @@ public class Main extends Application {
         optionsCalibrationPane = new OptionsCalibrationPane(primaryStage, this, calibrationConfig);
         calibrationPane = new CalibrationPane(primaryStage, gazeDeviceManager, calibrationConfig);
         home = new MainPane(this, primaryStage);
+        commandShortcut = new CommandShortcut(this, primaryStage, home, eyeTrackerPane);
         settings = new Settings(this);
-        commandShortcut = new CommandShortcut(home);
 
         decoratedPane.setCenter(home);
         Scene calibScene = new Scene(decoratedPane, primaryStage.getWidth(), primaryStage.getHeight());
@@ -143,7 +144,7 @@ public class Main extends Application {
 
     public void goToMain(Stage primaryStage) {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        primaryStage.setFullScreen(false);
+        //primaryStage.setFullScreen(false);
         primaryStage.getScene().setRoot(decoratedPane);
         primaryStage.setX((primaryScreenBounds.getWidth() - this.width)/2);
         primaryStage.setY((primaryScreenBounds.getHeight() - this.height)/2);
