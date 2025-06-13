@@ -15,11 +15,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import utils.CalibrationConfig;
 import utils.Settings;
 
-@Slf4j
 public class Main extends Application {
 
     @Getter

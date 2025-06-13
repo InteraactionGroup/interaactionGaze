@@ -11,18 +11,24 @@ plugins {
     id 'application'
     id 'distribution'
     id 'jacoco'
-    id 'org.openjfx.javafxplugin' version '0.0.8'
-    id 'io.freefair.lombok' version '4.1.4'
-    id 'com.github.hierynomus.license-report' version '0.15.0'
-    id 'com.github.spotbugs' version '2.0.0'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'io.freefair.lombok' version '6.4.3'
+    id 'com.github.hierynomus.license-report' version '0.16.1'
+    id 'com.github.spotbugs' version '6.1.11'
     id 'net.researchgate.release' version '2.6.0'
     id "de.undercouch.download" version '4.0.4'
-    id 'org.springframework.boot' version '2.2.1.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'org.springframework.boot' version '3.4.5'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
-ext.javafxVersion = "11.0.2"
-// Make it available everywhere via the project ext:
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'info.picocli:picocli-spring-boot-starter:4.7.5'
+    annotationProcessor 'info.picocli:picocli-codegen:4.7.5'
+}
+
+ext.javafxVersion = "21.0.1"
+
 ext {
     Download = de.undercouch.gradle.tasks.download.Download
     download = download
@@ -38,8 +44,6 @@ javafx {
     modules = ['javafx.controls', 'javafx.swing', 'javafx.media', 'javafx.web']
 }
 
-apply plugin: 'java'
-apply plugin: 'maven'
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven-publish'
@@ -109,16 +113,11 @@ subprojects {
     }
 
     spotbugs {
-        toolVersion = '4.0.0-beta3'
-
-        //ignoreFailures = false
-        //effort = "max"
-        //reportLevel = "high"
-        excludeFilter = file("spotbugs-exclude.xml")
+        toolVersion = '4.9.3'
     }
 
-    spotbugsMain.enabled = spotbugsEnabled
-    spotbugsTest.enabled = spotbugsEnabled
+    spotbugsMain.enabled = true
+    spotbugsTest.enabled = false
 
     downloadLicenses {
         dependencyConfiguration = 'compileClasspath'
@@ -134,7 +133,8 @@ subprojects {
         testImplementation "org.mockito:mockito-core:3.12.+"
     }
 
-    sourceCompatibility = '11'
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
 
     publishing {
         publications {
@@ -169,30 +169,28 @@ subprojects {
 
 dependencies {
     implementation 'org.projectlombok:lombok:1.18.20'
-    compile 'com.github.GazePlay:TobiiStreamEngineForJava:5.1'
-    compile 'com.google.code.gson:gson:2.8.1'
-    compile 'org.rxtx:rxtx:2.1.7'
-    compile 'ch.qos.logback:logback-classic:1.2.1'
-    compile 'ch.qos.logback:logback-core:1.2.1'
-    compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'uk.org.lidalia:sysout-over-slf4j:1.0.2'
-    compile 'javax.media:jmf:2.1.1e'
+    implementation files("${rootDir}/lib/EyeTribeJavaFx.jar")
+    implementation 'com.github.GazePlay:TobiiStreamEngineForJava:5.1'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.rxtx:rxtx:2.1.7'
+    implementation 'uk.org.lidalia:sysout-over-slf4j:1.0.2'
+    implementation 'javax.media:jmf:2.1.1e'
     implementation 'org.json:json:20090211'
-    compile 'ws.schild:jave-all-deps:2.5.0'
-    compile 'ws.schild:jave-core:2.5.0'
-    runtime 'org.slf4j:jcl-over-slf4j:1.7.25'
-    runtime 'org.slf4j:log4j-over-slf4j:1.7.25'
-    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+    implementation 'ws.schild:jave-all-deps:2.5.0'
+    implementation 'ws.schild:jave-core:2.5.0'
+
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly 'org.slf4j:jcl-over-slf4j:2.0.9'
+    runtimeOnly 'org.slf4j:log4j-over-slf4j:2.0.9'
 }
 
 jar {
-    enabled=true
     manifest {
         attributes(
                 "Implementation-Title": project.name,
                 "Implementation-Vendor": "Univ. Grenoble Alpes - LIG - GETALP",
                 "Main-Class": 'application.Main',
-                "Class-Path": configurations.runtime.collect { it.getName() }.join(' '),
+                "Class-Path": configurations.runtimeClasspath.collect { it.getName() }.join(' '),
                 "JavaFX-Version": javafxVersion,
                 "Built-By": System.properties['user.name']
         )
@@ -201,6 +199,7 @@ jar {
 
 distributions {
     noJRE {
+        setDistributionBaseName "${project.name}-no-jre"
         contents {
             with distributions.main.contents
             from("build/reports")
@@ -211,6 +210,7 @@ distributions {
     }
 
     windows {
+        setDistributionBaseName "${project.name}-windows-x64"
         contents {
             with distributions.main.contents
             from("build/reports")
@@ -227,6 +227,7 @@ distributions {
     }
 
     linux {
+        setDistributionBaseName "${project.name}-linux"
         contents {
             with distributions.main.contents
             from("build/reports")
@@ -246,6 +247,7 @@ distributions {
     }
 
     macos {
+        setDistributionBaseName "${project.name}-macos"
         contents {
             with distributions.main.contents
             from("build/reports")
@@ -276,6 +278,76 @@ task('downloadAndExtractLinuxDependecies').dependsOn('downloadAndExtractLinuxJRE
 macosDistTar.dependsOn(downloadAndExtractMacosJRE)
 windowsDistZip.dependsOn(downloadAndExtractWindowsJRE)
 linuxDistTar.dependsOn(downloadAndExtractLinuxDependecies)
+
+tasks.named('resolveMainClassName') {
+    dependsOn tasks.named('createLicence')
+    dependsOn tasks.named('unzipDistribution')
+}
+
+tasks.named('distTar') {
+    dependsOn tasks.named('unzipDistribution')
+}
+
+tasks.named('distZip') {
+    dependsOn tasks.named('unzipDistribution')
+}
+
+tasks.named('spotbugsMain') {
+    dependsOn tasks.named('unzipDistribution')
+}
+
+tasks.named('noJREDistTar') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+}
+
+tasks.named('noJREDistZip') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+}
+
+tasks.named('linuxDistTar') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+}
+
+tasks.named('linuxDistZip') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+    dependsOn tasks.named('extractOpenJFXForLibavPlugin')
+    dependsOn tasks.named('extractLinuxJRE')
+    dependsOn tasks.named('extractTobiiDriversForLinux')
+    dependsOn tasks.named('unzipDistribution')
+}
+
+tasks.named('macosDistTar') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+}
+
+tasks.named('macosDistZip') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+    dependsOn tasks.named('extractMacosJRE')
+    dependsOn tasks.named('unzipDistribution')
+}
+
+tasks.named('windowsDistTar') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+    dependsOn tasks.named('extractWindowsJRE')
+    dependsOn tasks.named('unzipDistribution')
+}
+
+tasks.named('windowsDistZip') {
+    dependsOn tasks.named('downloadLicenses')
+    dependsOn tasks.named('scriptsForRelease')
+}
+
+
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
+    excludeFilter = file("spotbugs-exclude.xml")
+}
 
 tasks.withType(Tar){
     compression = Compression.GZIP

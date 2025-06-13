@@ -32,8 +32,8 @@ task prepareInnoSetupFiles(group: 'distribution') {
             from("${rootDir}/gradle/innosetup/setup.iss.skel")
             rename("setup.iss.skel", "setup.iss")
             expand([
-                    applicationVersion: "latest",
-                    unpackedDirectory : "${project.name}-windows"
+                    applicationVersion: "${version}",
+                    unpackedDirectory : "${project.name}-windows-x64-${version}"
             ])
             into(innoSetupDir)
         }
@@ -59,7 +59,7 @@ task prepareInnoSetupFiles(group: 'distribution') {
 }
 
 task unzipDistribution(dependsOn: ['packageApp'], type: Copy, group: 'distribution') {
-    from zipTree("${buildDir}/distributions/${project.name}-windows.zip")
+    from zipTree("${buildDir}/distributions/${project.name}-windows-x64-${version}.zip")
     into buildDir
     fileMode 0777
     dirMode 0777

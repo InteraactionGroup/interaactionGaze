@@ -1,0 +1,42 @@
+name: Project Check Reminder
+
+on:
+  schedule:
+    - cron: '0 8 1 2 *'  # 1er février à 08:00 UTC
+    - cron: '0 8 1 8 *'  # 1er août à 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  create-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer la date du jour
+        id: date
+        run: echo "today=$(date +'%d/%m/%Y')" >> "$GITHUB_OUTPUT"
+
+      - name: Générer le contenu dynamique
+        run: |
+          cat > issue.md <<EOF
+          ## 🔁 Rappel semestriel : vérification des dépendances
+          
+          📅 Rappel généré automatiquement le **$TODAY**
+          
+          ### 🔍 Vérifications à faire :
+          - [ ] Vérification si mise à jour des dépendances Java (Gradle, Spring, autres libs)
+          - [ ] Vérification si mise à jour du JDK utilisé
+          - [ ] Vérification si mise à jour de JavaFX
+          - [ ] Vérification si mise à jour des plugins Gradle
+          - [ ] Vérification si mise à jour des bibliothèques
+          - [ ] Vérification si mise à jour des workflows GitHub Actions
+          EOF
+        env:
+          TODAY: ${{ steps.date.outputs.today }}
+
+      - name: Créer une issue de rappel
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: 📦 Vérification semestrielle des dépendances
+          content-filepath: issue.md
+          labels: maintenance, dependencies
+          token: ${{ secrets.GITHUB_TOKEN }}

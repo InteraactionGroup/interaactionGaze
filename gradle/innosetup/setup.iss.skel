@@ -34,7 +34,7 @@ DefaultGroupName=InteraactionGaze
 LicenseFile=licence.txt
 
 OutputDir=..\\distributions
-OutputBaseFilename=interAACtionGaze-windows-x64-installer
+OutputBaseFilename=interAACtionGaze-windows-x64-${applicationVersion}-installer
 ;Compression=lzma
 SolidCompression=yes
 

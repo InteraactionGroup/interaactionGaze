@@ -6,7 +6,7 @@ def jreVersion = project.ext.jreVersion
 def jreFolder = project.ext.jreFolder
 
 def filename = "zulu${zuluVersion}-ca-fx-jre${jreVersion}-linux_x64"
-def jfxfilename = "javafx-sdk-11.0.2"
+def jfxfilename = "javafx-sdk-17.0.2"
 
 apply plugin: 'java'
 apply plugin: 'de.undercouch.download'

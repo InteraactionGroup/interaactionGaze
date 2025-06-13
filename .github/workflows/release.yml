@@ -1,62 +1,133 @@
-on:
-  push:
-    branches:
-      - master
+name: Release InterAACtionGaze
 
-name: Release Gaze
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Version type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
+
+      - name: Show version type selected
+        run: echo "Version selected is -> ${{ github.event.inputs.bump }}"
+
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: false
+          haskell: false
+          large-packages: false
+          swap-storage: false
+
       - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '11'
-          
+          java-version: '17'
+
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16   
+          node-version: 16
 
       - name: Download JREs
         run: |
           chmod +x ./gradlew
           ./gradlew --stacktrace --info downloadAndExtractJREs
           chmod -R 777 build/jre
-
-      - name: Generate releases
+      - name: Setup Git Config
         run: |
-          ./gradlew --stacktrace --info packageApp
+          git config --global user.email "ci@gazeplay.net"
+          git config --global user.name "GazePlay Automation"
 
-      - name: Generate Windows Installer with InnoSetup
+      - name: Generate Releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          chmod 777 build/distributions
-          chmod -R 777 build/jre
-          ./gradlew --stacktrace --info generateWindowsInstallerInDocker
+          ./gradlew --stacktrace --info release      
+
+      - name: Rename Releases
+        run: |
+          cd ./build/distributions/
+          mv interAACtionGaze-linux*.tar.gz interAACtionGaze-linux.tar.gz
+          mv interAACtionGaze-macos*.tar.gz interAACtionGaze-macos.tar.gz
+          mv interAACtionGaze-no-jre*.zip interAACtionGaze-noJRE.zip
+          mv interAACtionGaze-no-jre*.tar.gz interAACtionGaze-noJRE.tar.gz
+          mv interAACtionGaze-windows*.zip interAACtionGaze-windows.zip
+          mv interAACtionGaze-windows-x64*installer.exe interAACtionGaze-windows-x64-installer.exe
 
       - name: Get Env
         run: |
           echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
+          echo "REPO_BASENAME=$(basename ${{ github.repository }})" >> $GITHUB_ENV
 
       - name: New tag
         id: new-tag
         run: |
-          LATEST_RELEASE_INFO=$(curl -s https://api.github.com/repos/${{ env.REPO_NAME }}/releases/latest)
-          NEW_VERSION_LINK=$(echo "$LATEST_RELEASE_INFO" | grep "browser_download_url.*interAACtionGaze*" | cut -d: -f2,3 | tr -d \")
-          NEW_VERSION=$( echo "${NEW_VERSION_LINK}" | cut -d/ -f9)
-          NEW_VERSION_NO_EXT=$( echo ${NEW_VERSION} | cut -d. -f1)
-          NEW_VERSION_NAME=$(echo "$LATEST_RELEASE_INFO" | grep "name.*interAACtionGaze*" | cut -d: -f2,3 | tr -d \" | head -n 1 | tr -d \,)
-          GET_TAG=$(echo "$NEW_VERSION_NAME" | cut -d " " -f3)
-          TAG_1=$(echo "$GET_TAG" | cut -d. -f1)
-          TAG_2=$(echo "$GET_TAG" | cut -d. -f2)
-          TAG_3=$(echo "$GET_TAG" | cut -d. -f3)
-          NEW_TAG=$(echo "$(( $TAG_3 + 1 ))")
-          TAG="${TAG_1}.${TAG_2}.${NEW_TAG}"
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          latest_tag=$(curl -s https://api.github.com/repos/${{ env.REPO_NAME }}/releases/latest | jq -r .tag_name)
+          version="${latest_tag#v}"  # strip leading 'v'
+          IFS='.' read -r major minor patch <<< "$version"
+
+          case "${{ github.event.inputs.bump }}" in
+            major)
+              major=$((major + 1))
+              minor=0
+              patch=0
+              nexPatch=$((patch + 1))
+              ;;
+            minor)
+              minor=$((minor + 1))
+              patch=0
+              nexPatch=$((patch + 1))
+              ;;
+            patch)
+              patch=$((patch + 1))
+              nexPatch=$((patch + 1))
+              ;;
+            *)
+              echo "Option invalide: $bump"
+              exit 1
+              ;;
+          esac
+
+          new_tag="v$major.$minor.$patch"
+          next_tag="$major.$minor.$nexPatch"
+          echo "tag=$new_tag" >> $GITHUB_OUTPUT
+          echo "nextTag=$next_tag" >> $GITHUB_OUTPUT
+
+      - name: Update version project for gradle
+        run: |
+          version="${{ steps.new-tag.outputs.nextTag }}"
+
+          if grep -q '^version=' gradle.properties; then
+            sed -i "s/^version=.*/version=${version}/" gradle.properties
+          else
+            echo "version=${version}" >> gradle.properties
+          fi
+
+      - name: Setup next release
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add gradle.properties
+          git commit -m "Setup next release for gradle"
+          git push
 
       - name: Create GitHub Release
         id: create_release

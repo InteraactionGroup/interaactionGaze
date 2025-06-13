@@ -3,12 +3,10 @@ package utils;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
 
-@Slf4j
 public class CalibrationPoint {
 
     public Cross cross;

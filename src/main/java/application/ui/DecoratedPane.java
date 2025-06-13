@@ -14,9 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class DecoratedPane extends BorderPane {
 
     private double xOffset = 0;
