@@ -7,7 +7,7 @@ Coded in Javafx.
 Website link -> https://interaactiongroup.github.io/interaactionGaze/   
 
 ## Update
-Last updated on 13/06/2025
+Last updated on 13/06/2025<br>
 JRE -> Java 17 (Azul Zulu), supported until 2029<br>
 JavaFx -> 21, supported until (at least) 2028<br>
 Gradle -> 8<br>
