@@ -190,6 +190,7 @@ public class CalibrationPane extends Pane {
             this.getChildren().add(target);
             addExitButton(main);
 
+            main.getMouseInfo().isCalibrating = true;
             main.getGazeDeviceManager().setPause(false);
         }
     }

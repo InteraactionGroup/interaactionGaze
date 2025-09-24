@@ -50,6 +50,7 @@ public class MainPane extends BorderPane {
         startstop.setPrefHeight(200);
         startstop.setPrefWidth(495. / 5);
         startstop.setOnAction((e) -> {
+            main.getMouseInfo().isCalibrating = false;
             main.getMouseInfo().createCoordianteFile();
             main.getGazeDeviceManager().setPause(false);
             main.goToEyeTracker(primaryStage);

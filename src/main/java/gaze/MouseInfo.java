@@ -36,6 +36,7 @@ public class MouseInfo {
     boolean dwellStarted;
     @Getter
     private IntegerProperty dwellRatio = new SimpleIntegerProperty(0);
+    public Boolean isCalibrating = false;
     public File coordinateFile;
 
     public MouseInfo() {
@@ -126,6 +127,7 @@ public class MouseInfo {
                     newFile = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\interAACtionGaze\\profils\\" + this.nameUser + "\\" + newNameFile + ".csv");
                 }
                 fileExists = newFile.exists();
+                i++;
             }while (fileExists);
             this.coordinateFile = newFile;
             try (FileWriter writer = new FileWriter(this.coordinateFile, true)) { // Mode append (ajout)
@@ -142,11 +144,14 @@ public class MouseInfo {
             }
         }
     }
+
     public void addCoordinate(double x, double y) {
-        try (FileWriter writer = new FileWriter(this.coordinateFile, true)) { // Mode append (ajout)
-            writer.write(x + "," + y + "\n"); // Ajouter une nouvelle ligne
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (this.isCalibrating == false){
+            try (FileWriter writer = new FileWriter(this.coordinateFile, true)) { // Mode append (ajout)
+                writer.write(x + "," + y + "\n"); // Ajouter une nouvelle ligne
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
