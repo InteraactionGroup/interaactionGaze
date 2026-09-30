@@ -1,143 +1,289 @@
-name: Release InterAACtionGaze
+  name: Release InterAACtionGaze
 
-on:
-  workflow_dispatch:
-    inputs:
-      bump:
-        description: 'Version type'
-        required: true
-        default: 'patch'
-        type: choice
-        options:
-          - major
-          - minor
-          - patch
+  on:
+    workflow_dispatch:
+      inputs:
+        bump:
+          description: "Version type"
+          required: true
+          default: "patch"
+          type: choice
+          options:
+            - major
+            - minor
+            - patch
 
-jobs:
-  release:
-    runs-on: ubuntu-latest
+  concurrency:
+    group: release-interAACtionGaze
+    cancel-in-progress: false
 
-    steps:
+  permissions:
+    contents: write
 
-      - name: Show version type selected
-        run: echo "Version selected is -> ${{ github.event.inputs.bump }}"
+  jobs:
+    release:
+      name: Build and Release
+      runs-on: ubuntu-latest
+      timeout-minutes: 60
 
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          tool-cache: false
-          android: true
-          dotnet: false
-          haskell: false
-          large-packages: false
-          swap-storage: false
+      steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v4
+        - name: Show version type selected
+          run: |
+            echo "Version bump: ${{ inputs.bump }}"
+            echo "Branch: ${{ github.ref_name }}"
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
+        - name: Free Disk Space
+          uses: jlumbroso/free-disk-space@v1.3.1
+          with:
+            tool-cache: false
+            android: true
+            dotnet: false
+            haskell: false
+            large-packages: false
+            swap-storage: false
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
+        - name: Checkout code
+          uses: actions/checkout@v5
+          with:
+            fetch-depth: 0
 
-      - name: Download JREs
-        run: |
-          chmod +x ./gradlew
-          ./gradlew --stacktrace --info downloadAndExtractJREs
-          chmod -R 777 build/jre
-      - name: Setup Git Config
-        run: |
-          git config --global user.email "ci@gazeplay.net"
-          git config --global user.name "GazePlay Automation"
+        - name: Set up JDK 17
+          uses: actions/setup-java@v6
+          with:
+            distribution: "zulu"
+            java-version: "17"
+            cache: "gradle"
 
-      - name: Generate Releases
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          ./gradlew --stacktrace --info release      
+        - name: Setup Node
+          uses: actions/setup-node@v7
+          with:
+            node-version: "22"
+            package-manager-cache: false
 
-      - name: Rename Releases
-        run: |
-          cd ./build/distributions/
-          mv interAACtionGaze-linux*.tar.gz interAACtionGaze-linux.tar.gz
-          mv interAACtionGaze-macos*.tar.gz interAACtionGaze-macos.tar.gz
-          mv interAACtionGaze-no-jre*.zip interAACtionGaze-noJRE.zip
-          mv interAACtionGaze-no-jre*.tar.gz interAACtionGaze-noJRE.tar.gz
-          mv interAACtionGaze-windows*.zip interAACtionGaze-windows.zip
-          mv interAACtionGaze-windows-x64*installer.exe interAACtionGaze-windows-x64-installer.exe
-
-      - name: Get Env
-        run: |
-          echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
-          echo "REPO_BASENAME=$(basename ${{ github.repository }})" >> $GITHUB_ENV
-
-      - name: New tag
-        id: new-tag
-        run: |
-          latest_tag=$(curl -s https://api.github.com/repos/${{ env.REPO_NAME }}/releases/latest | jq -r .tag_name)
-          version="${latest_tag#v}"  # strip leading 'v'
-          IFS='.' read -r major minor patch <<< "$version"
-
-          case "${{ github.event.inputs.bump }}" in
-            major)
-              major=$((major + 1))
-              minor=0
-              patch=0
-              nexPatch=$((patch + 1))
-              ;;
-            minor)
-              minor=$((minor + 1))
-              patch=0
-              nexPatch=$((patch + 1))
-              ;;
-            patch)
-              patch=$((patch + 1))
-              nexPatch=$((patch + 1))
-              ;;
-            *)
-              echo "Option invalide: $bump"
+        - name: Calculate release version
+          id: version
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            if [[ ! -f gradle.properties ]]; then
+              echo "ERROR: gradle.properties not found."
               exit 1
-              ;;
-          esac
+            fi
+            
+            current_version=$(grep '^version=' gradle.properties | cut -d'=' -f2-)
+            
+            if [[ -z "$current_version" ]]; then
+              echo "ERROR: version not found in gradle.properties."
+              exit 1
+            fi
+            
+            echo "Current Gradle version: $current_version"
+            
+            # Vérification du format SemVer simple : X.Y.Z
+            if [[ ! "$current_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "ERROR: Invalid version '$current_version'."
+              echo "Expected format: X.Y.Z"
+              exit 1
+            fi
+            
+            IFS='.' read -r major minor patch <<< "$current_version"
+            
+            case "${{ inputs.bump }}" in
+              major)
+                major=$((major + 1))
+                minor=0
+                patch=0
+                ;;
+            
+              minor)
+                minor=$((minor + 1))
+                patch=0
+                ;;
+            
+              patch)
+                patch=$((patch + 1))
+                ;;
+            
+              *)
+                echo "ERROR: Invalid bump type: ${{ inputs.bump }}"
+                exit 1
+                ;;
+            esac
+            
+            release_version="${major}.${minor}.${patch}"
+            
+            # La version suivante sera utilisée pour préparer
+            # le prochain développement.
+            next_patch=$((patch + 1))
+            next_version="${major}.${minor}.${next_patch}"
+            
+            release_tag="v${release_version}"
+            
+            echo "----------------------------------------"
+            echo "Current version : $current_version"
+            echo "Bump            : ${{ inputs.bump }}"
+            echo "Release version : $release_version"
+            echo "Release tag     : $release_tag"
+            echo "Next version    : $next_version"
+            echo "----------------------------------------"
+            
+            {
+              echo "current_version=$current_version"
+              echo "release_version=$release_version"
+              echo "release_tag=$release_tag"
+              echo "next_version=$next_version"
+            } >> "$GITHUB_OUTPUT"
 
-          new_tag="v$major.$minor.$patch"
-          next_tag="$major.$minor.$nexPatch"
-          echo "tag=$new_tag" >> $GITHUB_OUTPUT
-          echo "nextTag=$next_tag" >> $GITHUB_OUTPUT
+        - name: Set release version in Gradle
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            release_version="${{ steps.version.outputs.release_version }}"
+            
+            sed -i \
+              "s/^version=.*/version=${release_version}/" \
+              gradle.properties
+            
+            echo "gradle.properties:"
+            grep '^version=' gradle.properties
 
-      - name: Update version project for gradle
-        run: |
-          version="${{ steps.new-tag.outputs.nextTag }}"
+        - name: Prepare Gradle
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            chmod +x ./gradlew
 
-          if grep -q '^version=' gradle.properties; then
-            sed -i "s/^version=.*/version=${version}/" gradle.properties
-          else
-            echo "version=${version}" >> gradle.properties
-          fi
+        - name: Download JREs
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            ./gradlew --stacktrace --info downloadAndExtractJREs
+            
+            chmod -R 777 build/jre
 
-      - name: Setup next release
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add gradle.properties
-          git commit -m "Setup next release for gradle"
-          git push
+        - name: Setup Git Config
+          run: |
+            git config user.name "GazePlay Automation"
+            git config user.email "ci@gazeplay.net"
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.new-tag.outputs.tag }}
-          name: interAACtionGaze ${{ steps.new-tag.outputs.tag }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit: "master"
-          prerelease: true
-          draft: false
-          artifacts: "./build/distributions/interAACtionGaze-linux.tar.gz,./build/distributions/interAACtionGaze-macos.tar.gz,./build/distributions/interAACtionGaze-noJRE.tar.gz,./build/distributions/interAACtionGaze-noJRE.zip,./build/distributions/interAACtionGaze-windows.zip,./build/distributions/interAACtionGaze-windows-x64-installer.exe"
-          
+        - name: Generate Releases
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            ./gradlew --stacktrace --info release
+
+        - name: Check generated artifacts
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            echo "Generated artifacts:"
+            ls -lah ./build/distributions/
+            
+            test -n "$(find ./build/distributions -maxdepth 1 -name 'interAACtionGaze-linux*.tar.gz' -print -quit)"
+            test -n "$(find ./build/distributions -maxdepth 1 -name 'interAACtionGaze-macos*.tar.gz' -print -quit)"
+            test -n "$(find ./build/distributions -maxdepth 1 -name 'interAACtionGaze-no-jre*.zip' -print -quit)"
+            test -n "$(find ./build/distributions -maxdepth 1 -name 'interAACtionGaze-no-jre*.tar.gz' -print -quit)"
+            test -n "$(find ./build/distributions -maxdepth 1 -name 'interAACtionGaze-windows*.zip' -print -quit)"
+            test -n "$(find ./build/distributions -maxdepth 1 -name 'interAACtionGaze-windows-x64*installer.exe' -print -quit)"
+
+        - name: Rename Releases
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            cd ./build/distributions/
+            
+            mv interAACtionGaze-linux*.tar.gz \
+               interAACtionGaze-linux.tar.gz
+            
+            mv interAACtionGaze-macos*.tar.gz \
+               interAACtionGaze-macos.tar.gz
+            
+            mv interAACtionGaze-no-jre*.zip \
+               interAACtionGaze-noJRE.zip
+            
+            mv interAACtionGaze-no-jre*.tar.gz \
+               interAACtionGaze-noJRE.tar.gz
+            
+            mv interAACtionGaze-windows*.zip \
+               interAACtionGaze-windows.zip
+            
+            mv interAACtionGaze-windows-x64*installer.exe \
+               interAACtionGaze-windows-x64-installer.exe
+            
+            echo "Final artifacts:"
+            ls -lah
+
+        - name: Create GitHub Release
+          id: create_release
+          uses: ncipollo/release-action@v1.21.0
+          with:
+            tag: ${{ steps.version.outputs.release_tag }}
+            name: "interAACtionGaze ${{ steps.version.outputs.release_tag }}"
+            token: ${{ secrets.GITHUB_TOKEN }}
+
+            commit: master
+
+            prerelease: true
+            draft: false
+
+            artifactErrorsFailBuild: true
+
+            artifacts: >-
+              ./build/distributions/interAACtionGaze-linux.tar.gz,
+              ./build/distributions/interAACtionGaze-macos.tar.gz,
+              ./build/distributions/interAACtionGaze-noJRE.tar.gz,
+              ./build/distributions/interAACtionGaze-noJRE.zip,
+              ./build/distributions/interAACtionGaze-windows.zip,
+              ./build/distributions/interAACtionGaze-windows-x64-installer.exe
+
+        - name: Prepare next development version
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            next_version="${{ steps.version.outputs.next_version }}"
+            
+            sed -i \
+              "s/^version=.*/version=${next_version}/" \
+              gradle.properties
+            
+            echo "Next development version:"
+            grep '^version=' gradle.properties
+
+        - name: Commit next development version
+          shell: bash
+          run: |
+            set -euo pipefail
+            
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            
+            git add gradle.properties
+            
+            if git diff --cached --quiet; then
+              echo "No changes to commit."
+              exit 0
+            fi
+            
+            git commit \
+              -m "chore: prepare next release ${{ steps.version.outputs.next_version }}"
+            
+            git push origin HEAD:master
+
+        - name: Release summary
+          run: |
+            echo "========================================"
+            echo " InterAACtionGaze release completed"
+            echo "========================================"
+            echo "Previous version : ${{ steps.version.outputs.current_version }}"
+            echo "Release version  : ${{ steps.version.outputs.release_version }}"
+            echo "Release tag      : ${{ steps.version.outputs.release_tag }}"
+            echo "Next version     : ${{ steps.version.outputs.next_version }}"
+            echo "========================================"
